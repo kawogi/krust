@@ -1,0 +1,14 @@
+[package]
+name = "krust"
+version = "0.0.1"
+authors = [ "fyl2xp1" ]
+
+[dependencies]
+libc = "*"
+
+[[bin]]
+name = "krust"
+
+#[lib]
+#name = "krust"
+#path = "src/lib.rs"
