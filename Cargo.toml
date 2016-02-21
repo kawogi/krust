@@ -2,9 +2,16 @@
 name = "krust"
 version = "0.0.1"
 authors = [ "fyl2xp1" ]
+description = "A thin rusty wrapper around the Vulkan-API; provides some convenience functions for common tasks"
+documentation = "https://github.com/fyl2xp1/krust"
+homepage = "https://github.com/fyl2xp1/krust"
+repository = "https://github.com/fyl2xp1/krust"
+#readme = "..."
+keywords = ["vulkan", "bindings", "api", "wrapper", "vk"]
+license = "Apache-2.0"
 
 [dependencies]
-libc = "*"
+libc = "0.2.7"
 
 [[bin]]
 name = "krust"
