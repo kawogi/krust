@@ -1,6 +1,5 @@
 
 
-
 #[repr(C)]
 #[allow(dead_code)]
 #[allow(non_camel_case_types)]
@@ -16,6 +15,7 @@ pub enum VkPipelineCacheHeaderVersion {
 #[repr(C)]
 #[allow(dead_code)]
 #[allow(non_camel_case_types)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum VkResult {
 	VK_SUCCESS = 0,
 	VK_NOT_READY = 1,
@@ -45,6 +45,8 @@ pub enum VkResult {
 	//VK_RESULT_RANGE_SIZE = (VkResult::VK_INCOMPLETE - VkResult::VK_ERROR_FORMAT_NOT_SUPPORTED + 1),
 	//VK_RESULT_MAX_ENUM = 0x7FFFFFFF
 }
+
+
 
 #[repr(C)]
 #[allow(dead_code)]

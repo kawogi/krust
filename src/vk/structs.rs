@@ -21,7 +21,7 @@ pub struct VkApplicationInfo {
 #[allow(non_snake_case)]
 pub struct VkInstanceCreateInfo {
 	pub sType: VkStructureType,
-	pub pNext: *const libc::c_void,
+	pub pNext: *const libc::c_void, //::std::any::Any, // libc::c_void,
 	pub flags: VkInstanceCreateFlags,
 	pub pApplicationInfo: *const VkApplicationInfo,
 	pub enabledLayerCount: u32,

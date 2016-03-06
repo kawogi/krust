@@ -17,12 +17,14 @@ extern "stdcall" {
 	//    const VkAllocationCallbacks* pAllocator,
 	//    VkInstance* pInstance);
 	//
+	/// instance::Instance::create
     pub fn vkCreateInstance(pCreateInfo: *const VkInstanceCreateInfo, pAllocator: *const VkAllocationCallbacks, pInstance: *mut VkInstance) -> VkResult;
     
 	//void vkDestroyInstance(
 	//    VkInstance instance,
 	//    const VkAllocationCallbacks* pAllocator);
 	//
+	/// instance::Instance::destroy
 	pub fn vkDestroyInstance(instance: VkInstance, pAllocator: *const VkAllocationCallbacks);
     
 	//VkResult vkEnumeratePhysicalDevices(
@@ -30,6 +32,7 @@ extern "stdcall" {
 	//    u32* pPhysicalDeviceCount,
 	//    VkPhysicalDevice* pPhysicalDevices);
 	//
+	/// instance::Instance::enumerate_physical_devices
     pub fn vkEnumeratePhysicalDevices(instance: VkInstance, pPhysicalDeviceCount: *mut u32, pPhysicalDevices: *mut VkPhysicalDevice) -> VkResult;
 
 	//void vkGetPhysicalDeviceFeatures(
@@ -79,6 +82,7 @@ extern "stdcall" {
 	//    VkInstance instance,
 	//    const char* pName);
 	//
+	/// instance::Instance::get_proc_addr
 	//pub fn vkGetInstanceProcAddr(instance: VkInstance, pName: *const u8) -> PFN_vkVoidFunction;
 	
 	//PFN_vkVoidFunction vkGetDeviceProcAddr(
