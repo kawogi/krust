@@ -369,6 +369,7 @@ pub enum VkImageTiling {
 #[repr(C)]
 #[allow(dead_code)]
 #[allow(non_camel_case_types)]
+#[derive(Debug)]
 pub enum VkPhysicalDeviceType {
 	VK_PHYSICAL_DEVICE_TYPE_OTHER = 0,
 	VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU = 1,
