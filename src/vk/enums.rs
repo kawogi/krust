@@ -366,21 +366,31 @@ pub enum VkImageTiling {
 	//VK_IMAGE_TILING_MAX_ENUM = 0x7FFFFFFF
 }
 
-#[repr(C)]
+//#[repr(C)]
+//#[allow(dead_code)]
+//#[allow(non_camel_case_types)]
+//#[derive(Debug)]
+//pub enum VkPhysicalDeviceType {
 #[allow(dead_code)]
-#[allow(non_camel_case_types)]
-#[derive(Debug)]
-pub enum VkPhysicalDeviceType {
-	VK_PHYSICAL_DEVICE_TYPE_OTHER = 0,
-	VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU = 1,
-	VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU = 2,
-	VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU = 3,
-	VK_PHYSICAL_DEVICE_TYPE_CPU = 4,
-	//VK_PHYSICAL_DEVICE_TYPE_BEGIN_RANGE = VK_PHYSICAL_DEVICE_TYPE_OTHER,
-	//VK_PHYSICAL_DEVICE_TYPE_END_RANGE = VK_PHYSICAL_DEVICE_TYPE_CPU,
-	//VK_PHYSICAL_DEVICE_TYPE_RANGE_SIZE = (VK_PHYSICAL_DEVICE_TYPE_CPU - VK_PHYSICAL_DEVICE_TYPE_OTHER + 1),
-	//VK_PHYSICAL_DEVICE_TYPE_MAX_ENUM = 0x7FFFFFFF
-}
+pub const VK_PHYSICAL_DEVICE_TYPE_OTHER: VkPhysicalDeviceType = 0;
+#[allow(dead_code)]
+pub const VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU: VkPhysicalDeviceType = 1;
+#[allow(dead_code)]
+pub const VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU: VkPhysicalDeviceType = 2;
+#[allow(dead_code)]
+pub const VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU: VkPhysicalDeviceType = 3;
+#[allow(dead_code)]
+pub const VK_PHYSICAL_DEVICE_TYPE_CPU: VkPhysicalDeviceType = 4;
+#[allow(dead_code)]
+pub const VK_PHYSICAL_DEVICE_TYPE_BEGIN_RANGE: VkPhysicalDeviceType = VK_PHYSICAL_DEVICE_TYPE_OTHER;
+#[allow(dead_code)]
+pub const VK_PHYSICAL_DEVICE_TYPE_END_RANGE: VkPhysicalDeviceType = VK_PHYSICAL_DEVICE_TYPE_CPU;
+#[allow(dead_code)]
+pub const VK_PHYSICAL_DEVICE_TYPE_RANGE_SIZE: VkPhysicalDeviceType = (VK_PHYSICAL_DEVICE_TYPE_CPU - VK_PHYSICAL_DEVICE_TYPE_OTHER + 1);
+#[allow(dead_code)]
+pub const VK_PHYSICAL_DEVICE_TYPE_MAX_ENUM: VkPhysicalDeviceType = 0x7FFFFFFF;
+//}
+pub type VkPhysicalDeviceType = u32;
 
 #[repr(C)]
 #[allow(dead_code)]

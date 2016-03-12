@@ -54,6 +54,7 @@ impl<'a> CreateInfo<'a> {
 		}
 	}
 	
+	#[allow(dead_code)]
 	pub fn for_application_info(application_info: &'a VkApplicationInfo) -> CreateInfo<'a> {
 		CreateInfo {
 			application_info: Option::Some(application_info),

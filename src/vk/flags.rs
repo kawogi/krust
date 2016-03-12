@@ -64,16 +64,16 @@ pub enum VkSampleCountFlagBits {
 }
 pub type VkSampleCountFlags = VkFlags;
 
-#[repr(C)]
-#[allow(dead_code)]
-#[allow(non_camel_case_types)]
-pub enum VkQueueFlagBits {
-	VK_QUEUE_GRAPHICS_BIT = 0x00000001,
-	VK_QUEUE_COMPUTE_BIT = 0x00000002,
-	VK_QUEUE_TRANSFER_BIT = 0x00000004,
-	VK_QUEUE_SPARSE_BINDING_BIT = 0x00000008,
+bitflags! {
+	#[repr(C)]
+	#[derive(Default)]
+	pub flags VkQueueFlags: u32 { // VkFlags
+		const VK_QUEUE_GRAPHICS_BIT = 0x00000001,
+		const VK_QUEUE_COMPUTE_BIT = 0x00000002,
+		const VK_QUEUE_TRANSFER_BIT = 0x00000004,
+		const VK_QUEUE_SPARSE_BINDING_BIT = 0x00000008,
+	}
 }
-pub type VkQueueFlags = VkFlags;
 
 #[repr(C)]
 #[allow(dead_code)]

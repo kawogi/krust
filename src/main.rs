@@ -1,3 +1,6 @@
+#[macro_use]
+extern crate bitflags;
+
 extern crate libc;
 
 mod vk;
@@ -25,7 +28,7 @@ fn main() {
 	let physical_devices = instance.enumerate_physical_devices().unwrap();
 
 	for physical_device in physical_devices.iter() {
-		println!("Physical device handle: {:?}", physical_device);
+		println!("Physical device: {:?}", physical_device);
 	}
 
 }

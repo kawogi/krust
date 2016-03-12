@@ -49,6 +49,7 @@ pub struct VkAllocationCallbacks {
 #[repr(C)]
 #[allow(non_snake_case)]
 #[allow(dead_code)]
+#[derive(Default)]
 pub struct VkPhysicalDeviceFeatures {
 	pub robustBufferAccess: VkBool32,
 	pub fullDrawIndexUint32: VkBool32,
@@ -119,6 +120,7 @@ pub struct VkFormatProperties {
 #[repr(C)]
 #[allow(non_snake_case)]
 #[allow(dead_code)]
+#[derive(Clone, Default)]
 pub struct VkExtent3D {
 	pub width: u32,
 	pub height: u32,
@@ -139,6 +141,7 @@ pub struct VkImageFormatProperties {
 #[repr(C)]
 #[allow(non_snake_case)]
 #[allow(dead_code)]
+#[derive(Default)]
 pub struct VkPhysicalDeviceLimits {
 	pub maxImageDimension1D: u32,
 	pub maxImageDimension2D: u32,
@@ -251,6 +254,7 @@ pub struct VkPhysicalDeviceLimits {
 #[repr(C)]
 #[allow(non_snake_case)]
 #[allow(dead_code)]
+#[derive(Default)]
 pub struct VkPhysicalDeviceSparseProperties {
 	pub residencyStandard2DBlockShape: VkBool32,
 	pub residencyStandard2DMultisampleBlockShape: VkBool32,
@@ -262,28 +266,38 @@ pub struct VkPhysicalDeviceSparseProperties {
 #[repr(C)]
 #[allow(non_snake_case)]
 #[allow(dead_code)]
+#[derive(Default)]
 pub struct VkPhysicalDeviceProperties {
 	pub apiVersion: u32,
 	pub driverVersion: u32,
 	pub vendorID: u32,
 	pub deviceID: u32,
 	pub deviceType: VkPhysicalDeviceType,
-	pub deviceName: [libc::c_uchar; VK_MAX_PHYSICAL_DEVICE_NAME_SIZE],
+	pub deviceName: DeviceNameBuffer, //[libc::c_uchar; VK_MAX_PHYSICAL_DEVICE_NAME_SIZE],
 	pub pipelineCacheUUID: [u8; VK_UUID_SIZE],
 	pub limits: VkPhysicalDeviceLimits,
 	pub sparseProperties: VkPhysicalDeviceSparseProperties,
 }
 
 #[repr(C)]
+pub struct DeviceNameBuffer(pub [u8; 256]);
+
+impl Default for DeviceNameBuffer {
+    fn default() -> Self { DeviceNameBuffer([0; 256]) }
+}
+
+
+#[repr(C)]
 #[allow(non_snake_case)]
 #[allow(dead_code)]
+#[derive(Clone, Default)]
 pub struct VkQueueFamilyProperties {
 	pub queueFlags: VkQueueFlags,
 	pub queueCount: u32,
 	pub timestampValidBits: u32,
 	pub minImageTransferGranularity: VkExtent3D,
 }
-
+	
 #[repr(C)]
 #[allow(non_snake_case)]
 #[allow(dead_code)]

@@ -38,7 +38,6 @@ extern "stdcall" {
 	//void vkGetPhysicalDeviceFeatures(
 	//    VkPhysicalDevice physicalDevice,
 	//    VkPhysicalDeviceFeatures* pFeatures);
-	//
 	pub fn vkGetPhysicalDeviceFeatures(physicalDevice: VkPhysicalDevice, pFeatures: *mut VkPhysicalDeviceFeatures);
     
 	//void vkGetPhysicalDeviceFormatProperties(
@@ -63,6 +62,7 @@ extern "stdcall" {
 	//    VkPhysicalDevice physicalDevice,
 	//    VkPhysicalDeviceProperties* pProperties);
 	//
+	/// physical_device::PhysicalDevice::create(handle: VkPhysicalDevice) -> Self
 	pub fn vkGetPhysicalDeviceProperties(physicalDevice: VkPhysicalDevice, pProperties: *mut VkPhysicalDeviceProperties);
 	
 	//void vkGetPhysicalDeviceQueueFamilyProperties(
@@ -70,6 +70,8 @@ extern "stdcall" {
 	//    u32* pQueueFamilyPropertyCount,
 	//    VkQueueFamilyProperties* pQueueFamilyProperties);
 	//
+	/// physical_device::PhysicalDevice::create(handle: VkPhysicalDevice) -> Self
+	///     physical_device::PhysicalDevice::get_queue_family_properties
 	pub fn vkGetPhysicalDeviceQueueFamilyProperties(physicalDevice: VkPhysicalDevice, pQueueFamilyPropertyCount: *mut u32, pQueueFamilyProperties: *mut VkQueueFamilyProperties);
 	
 	//void vkGetPhysicalDeviceMemoryProperties(
