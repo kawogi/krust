@@ -1,5 +1,11 @@
 extern crate libc;
 
+mod features;
+mod queue_family_properties;
+
+use self::features::PhysicalDeviceFeatures;
+use self::queue_family_properties::QueueFamilyProperties;
+
 use std::ptr;
 use std::vec::Vec;
 
@@ -380,246 +386,7 @@ pub struct PhysicalDevice {
 
 	pub queue_family_properties: Vec<QueueFamilyProperties>,
 
-// VkPhysicalDeviceFeatures {
-
-	/// robustBufferAccess indicates that out of bounds accesses to buffers via shader operations are well-defined.
-	///
-	/// – When enabled, out-of-bounds buffer reads will return any of the following values:
-	///		- Values from anywhere within the buffer object.
-	///		- Zero values, or (0,0,0,x) vectors for vector reads where x is a valid value represented in the type of the vector components and may be any of:
-	///			- 0, 1, or the maximum representable positive integer value, for signed or unsigned integer components
-	///			- 0.0 or 1.0, for floating-point components
-	///	- When enabled, out-of-bounds writes may modify values within the buffer object or be ignored.
-	///	– If not enabled, out of bounds accesses may cause undefined behaviour up-to and including process termination.
-	///
-	pub robust_buffer_access: bool, // robustBufferAccess: VkBool32,
-	
-	/// fullDrawIndexUint32 indicates the full 32-bit range of indices is supported for indexed draw calls when using a VkIndexType of VK_INDEX_TYPE_UINT32. maxDrawIndexedIndexValue is the maximum index value that may be used (aside from the primitive restart index, which is always 2 32 -1 when the VkIndexType is VK_INDEX_TYPE_UINT32). If this feature is supported, maxDrawIndexedIndexValue must be 2 32 -1; otherwise it must be no smaller than 2 24 -1. See maxDrawIndexedIndexValue.
-	pub full_draw_index_uint32: bool, // fullDrawIndexUint32: VkBool32,
-	
-	/// imageCubeArray indicates whether image views with a VkImageViewType of VK_IMAGE_VIEW_TYPE_CUBE_ARRAY can be created, and that the corresponding SampledCubeArray and ImageCubeArray SPIR-V capabilities can be used in shader code.
-	pub image_cube_array: bool, // imageCubeArray: VkBool32,
-	
-	/// independentBlend indicates whether the VkPipelineColorBlendAttachmentState settings are controlled independently per-attachment. If this feature is not enabled, the VkPipelineColorBlendAttachmentState settings for all color attachments must be identical. Otherwise, a different VkPipelineColorBlendAttachmentState can be provided for each bound color attachment.
-	pub independent_blend: bool, // independentBlend: VkBool32,
-	
-	/// geometryShader indicates whether geometry shaders are supported. If this feature is not enabled, the VK_SHADER_STAGE_GEOMETRY_BIT and VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT enum values must not be used. This also indicates whether shader modules can declare the Geometry capability.
-	pub geometry_shader: bool, // geometryShader: VkBool32,
-	
-	/// tessellationShader indicates whether tessellation control and evaluation shaders are supported. If this feature is not enabled, the VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT, VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT, VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT, VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT, and VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO enum values must not be used. This also indicates whether shader modules can declare the Tessellation capability.
-	pub tesselation_shader: bool, // tessellationShader: VkBool32,
-	
-	/// sampleRateShading indicates whether per-sample shading and multisample interpolation are supported. If this feature is not enabled, the sampleShadingEnable member of the VkPipelineMultisampleStateCreateInfo structure must be set to VK_FALSE and the minSampleShading member is ignored. This also indicates whether shader modules can declare the SampleRateShading capability.
-	pub sample_rate_shading: bool, // sampleRateShading: VkBool32,
-	
-	/// dualSrcBlend indicates whether blend operations which take two sources are supported. If this feature is not enabled, the VK_BLEND_FACTOR_SRC1_COLOR, VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR, VK_BLEND_FACTOR_SRC1_ALPHA, and VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA enum values must not be used as source or destination blending factors. See Section 26.1.2.
-	pub dual_src_blend: bool, // dualSrcBlend: VkBool32,
-	
-	/// logicOp indicates whether logic operations are supported. If this feature is not enabled, the logicOpEnable member of the VkPipelineColorBlendStateCreateInfo structure must be set to VK_FALSE, and the logicOp member is ignored.
-	pub logic_op: bool, // logicOp: VkBool32,
-	
-	/// multiDrawIndirect indicates whether multi-draw indirect is supported. If this feature is not enabled, the drawCount parameter to the vkCmdDrawIndirect and vkCmdDrawIndexedIndirect commands must be 1. The maxDrawIndirectCount member of the VkPhysicalDeviceLimits structure must also be 1 if this feature is not supported. See maxDrawIndirectCount.
-	pub multi_draw_indirect: bool, // multiDrawIndirect: VkBool32,
-	
-	/// drawIndirectFirstInstance indicates whether indirect draw calls support the firstInstance parameter. If this feature is not enabled, the firstInstance member of all VkDrawIndirectCommand and VkDrawIndexedIndirectCommand structures that are provided to the vkCmdDrawIndirect and vkCmdDrawIndexedIndirect commands must be 0.
-	pub draw_indirect_first_instance: bool, // drawIndirectFirstInstance: VkBool32,
-	
-	/// depthClamp indicates whether depth clamping is supported. If this feature is not enabled, the depthClampEnable member of the VkPipelineRasterizationStateCreateInfo structure must be set to VK_FALSE. Otherwise, setting depthClampEnable to VK_TRUE will enable depth clamping.
-	pub depth_clamp: bool, // depthClamp: VkBool32,
-	
-	/// depthBiasClamp indicates whether depth bias clamping is supported. If this feature is not enabled, the depthBiasClamp member of the VkPipelineRasterizationStateCreateInfo structure must be set to 0.0.
-	pub depth_bias_clamp: bool, // depthBiasClamp: VkBool32,
-	
-	/// fillModeNonSolid indicates whether point and wireframe fill modes are supported. If this feature is not enabled, the VK_POLYGON_MODE_POINT and VK_POLYGON_MODE_LINE enum values must not be used.
-	pub fill_mode_non_solid: bool, // fillModeNonSolid: VkBool32,
-	
-	/// depthBounds indicates whether depth bounds tests are supported. If this feature is not enabled, the depthBoundsTestEnable member of the VkPipelineDepthStencilStateCreateInfo structure must be set to VK_FALSE. When depthBoundsTestEnable is set to VK_FALSE, the values of the minDepthBounds and maxDepthBounds members of the VkPipelineDepthStencilStateCreateInfo structure are ignored.
-	pub depth_bounds: bool, // depthBounds: VkBool32,
-	
-	/// wideLines indicates whether lines with width other than 1.0 are supported. If this feature is not enabled, the lineWidth member of the VkPipelineRasterizationStateCreateInfo structure must be set to 1.0. When this feature is supported, the range and granularity of supported line widths are indicated by the lineWidthRange and lineWidthGranularity members of the VkPhysicalDeviceLimits structure, respectively.
-	pub wide_lines: bool, // wideLines: VkBool32,
-	
-	/// largePoints indicates whether points with size greater than 1.0 are supported. If this feature is not enabled, only a point size of 1.0 written by a shader is supported. The range and granularity of supported point sizes are indicated by the pointSizeRange and pointSizeGranularity members of the VkPhysicalDeviceLimits structure, respectively.
-	pub large_points: bool, // largePoints: VkBool32,
-	
-	/// alphaToOne indicates whether the implementation is able to replace the alpha value of the color fragment output from the fragment shader with the maximum representable alpha value for fixed-point colors or 1.0 for floating-point colors. If this feature is not enabled, then the alphaToOneEnable member of the VkPipelineMultisampleStateCreateInfo structure must be set to VK_FALSE. Otherwise setting alphaToOneEnable to VK_TRUE will enable alpha-to-one behaviour.
-	pub alpha_to_one: bool, // alphaToOne: VkBool32,
-	
-	/// multiViewport indicates whether more than one viewport is supported. If this feature is not enabled, the viewportCount and scissorCount members of the VkPipelineViewportStateCreateInfo structure must be set to 1. Similarly, the viewportCount parameter to the vkCmdSetViewport command and the scissorCount parameter to the vkCmdSetScissor command must be 1, and the firstViewport parameter to the vkCmdSetViewport command and the firstScissor parameter to the vkCmdSetScissor command must be 0.
-	pub multi_viewport: bool, // multiViewport: VkBool32,
-	
-	/// samplerAnisotropy indicates whether anisotropic filtering is supported. If this feature is not enabled, the maxAnisotropy member of the VkSamplerCreateInfo structure must be 1.0.
-	pub sampler_anisotropy: bool, // samplerAnisotropy: VkBool32,
-	
-	/// textureCompressionETC2 indicates whether the ETC2 and EAC compressed texture formats are supported. If this feature is not enabled, the following formats must not be used to create images:
-	///
-	/// – VK_FORMAT_ETC2_R8G8B8_UNORM_BLOCK
-	/// – VK_FORMAT_ETC2_R8G8B8_SRGB_BLOCK
-	/// – VK_FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK
-	/// – VK_FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK
-	/// – VK_FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK
-	/// – VK_FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK
-	/// – VK_FORMAT_EAC_R11_UNORM_BLOCK
-	/// – VK_FORMAT_EAC_R11_SNORM_BLOCK
-	/// – VK_FORMAT_EAC_R11G11_UNORM_BLOCK
-	/// – VK_FORMAT_EAC_R11G11_SNORM_BLOCK
-	/// 
-	/// vkGetPhysicalDeviceFormatProperties is used to check for the supported properties of individual formats.
-	pub texture_compression_etc2: bool, // textureCompressionETC2: VkBool32,
-	
-	/// textureCompressionASTC_LDR indicates whether the ASTC LDR compressed texture formats are supported. If this feature is not enabled, the following formats must not be used to create images:
-	///
-	/// – VK_FORMAT_ASTC_4x4_UNORM_BLOCK
-	/// – VK_FORMAT_ASTC_4x4_SRGB_BLOCK
-	/// – VK_FORMAT_ASTC_5x4_UNORM_BLOCK
-	/// – VK_FORMAT_ASTC_5x4_SRGB_BLOCK
-	/// – VK_FORMAT_ASTC_5x5_UNORM_BLOCK
-	/// – VK_FORMAT_ASTC_5x5_SRGB_BLOCK
-	/// – VK_FORMAT_ASTC_6x5_UNORM_BLOCK
-	/// – VK_FORMAT_ASTC_6x5_SRGB_BLOCK
-	/// – VK_FORMAT_ASTC_6x6_UNORM_BLOCK
-	/// – VK_FORMAT_ASTC_6x6_SRGB_BLOCK
-	/// – VK_FORMAT_ASTC_8x5_UNORM_BLOCK
-	/// – VK_FORMAT_ASTC_8x5_SRGB_BLOCK
-	/// – VK_FORMAT_ASTC_8x6_UNORM_BLOCK
-	/// – VK_FORMAT_ASTC_8x6_SRGB_BLOCK
-	/// – VK_FORMAT_ASTC_8x8_UNORM_BLOCK
-	/// – VK_FORMAT_ASTC_8x8_SRGB_BLOCK
-	/// – VK_FORMAT_ASTC_10x5_UNORM_BLOCK
-	/// – VK_FORMAT_ASTC_10x5_SRGB_BLOCK
-	/// – VK_FORMAT_ASTC_10x6_UNORM_BLOCK
-	/// – VK_FORMAT_ASTC_10x6_SRGB_BLOCK
-	/// – VK_FORMAT_ASTC_10x8_UNORM_BLOCK
-	/// – VK_FORMAT_ASTC_10x8_SRGB_BLOCK
-	/// – VK_FORMAT_ASTC_10x10_UNORM_BLOCK
-	/// – VK_FORMAT_ASTC_10x10_SRGB_BLOCK
-	/// – VK_FORMAT_ASTC_12x10_UNORM_BLOCK
-	/// – VK_FORMAT_ASTC_12x10_SRGB_BLOCK
-	/// – VK_FORMAT_ASTC_12x12_UNORM_BLOCK
-	/// – VK_FORMAT_ASTC_12x12_SRGB_BLOCK
-	///
-	/// vkGetPhysicalDeviceFormatProperties is used to check for the supported properties of individual formats.
-	pub texture_compression_astc_ldr: bool, // textureCompressionASTC_LDR: VkBool32,
-	
-	/// textureCompressionBC indicates whether the BC compressed texture formats are supported. If this feature is not enabled, the following formats must not be used to create images:
-	///
-	/// – VK_FORMAT_BC1_RGB_UNORM_BLOCK
-	/// – VK_FORMAT_BC1_RGB_SRGB_BLOCK
-	/// – VK_FORMAT_BC1_RGBA_UNORM_BLOCK
-	/// – VK_FORMAT_BC1_RGBA_SRGB_BLOCK
-	/// – VK_FORMAT_BC2_UNORM_BLOCK
-	/// – VK_FORMAT_BC2_SRGB_BLOCK
-	/// – VK_FORMAT_BC3_UNORM_BLOCK
-	/// – VK_FORMAT_BC3_SRGB_BLOCK
-	/// – VK_FORMAT_BC4_UNORM_BLOCK
-	/// – VK_FORMAT_BC4_SNORM_BLOCK
-	/// – VK_FORMAT_BC5_UNORM_BLOCK
-	/// – VK_FORMAT_BC5_SNORM_BLOCK
-	/// – VK_FORMAT_BC6H_UFLOAT_BLOCK
-	/// – VK_FORMAT_BC6H_SFLOAT_BLOCK
-	/// – VK_FORMAT_BC7_UNORM_BLOCK
-	/// – VK_FORMAT_BC7_SRGB_BLOCK
-	///
-	/// vkGetPhysicalDeviceFormatProperties is used to check for the supported properties of individual formats.
-	pub texture_compression_bc: bool, // textureCompressionBC: VkBool32,
-	
-	/// occlusionQueryPrecise indicates whether occlusion queries returning actual sample counts are supported. Occlusion queries are created in a VkQueryPool by specifying the queryType of VK_QUERY_TYPE_OCCLUSION in the VkQueryPoolCreateInfo structure which is passed to vkCreateQueryPool. If this feature is enabled, queries of this type can enable VK_QUERY_CONTROL_PRECISE_BIT in the flags parameter to vkCmdBeginQuery. If this feature is not supported, the implementation supports only boolean occlusion queries. When any samples are passed, boolean queries will return a non-zero result value, otherwise a result value of zero is returned. When this feature is enabled and VK_QUERY_CONTROL_PRECISE_BIT is set, occlusion queries will report the actual number of samples passed.
-	pub occlusion_query_precise: bool, // occlusionQueryPrecise: VkBool32,
-	
-	/// pipelineStatisticsQuery indicates whether the pipeline statistics queries are supported. If this feature is not enabled, queries of type VK_QUERY_TYPE_PIPELINE_STATISTICS cannot be created, and none of the VkQueryPipelineStatisticFlagBits bits can be set in the pipelineStatistics member of the VkQueryPoolCreateInfo structure.
-	pub pipeline_statistics_query: bool, // pipelineStatisticsQuery: VkBool32,
-	
-	/// vertexPipelineStoresAndAtomics indicates whether storage buffers and images support stores and atomic operations in the vertex, tessellation, and geometry shader stages. If this feature is not enabled, all storage image, storage texel buffers, and storage buffer variables used by these stages in shader modules must be decorated with the NonWriteable decoration (or the readonly memory qualifier in GLSL).
-	pub vertex_pipeline_stores_and_atomics: bool, // vertexPipelineStoresAndAtomics: VkBool32,
-	
-	/// fragmentStoresAndAtomics indicates whether storage buffers and images support stores and atomic operations in the fragment shader stage. If this feature is not enabled, all storage image, storage texel buffers, and storage buffer variables used by the fragment stage in shader modules must be decorated with the NonWriteable decoration (or the readonly memory qualifier in GLSL).
-	pub fragment_stores_and_atomics: bool, // fragmentStoresAndAtomics: VkBool32,
-	
-	/// shaderTessellationAndGeometryPointSize indicates whether the PointSize built-in decoration is available in the tessellation control, tessellation evaluation, and geometry shader stages. If this feature is not enabled, the PointSize built-in decoration is not available in these shader stages and all points written from a tessellation or geometry shader will have a size of 1.0. This also indicates whether shader modules can declare the TessellationPointSize capability for tessellation control and evaluation shaders, or if the shader modules can declare the GeometryPointSize capability for geometry shaders. An implementation supporting this feature must also support one or both of the tessellationShader or geometryShader features.
-	pub shader_tesselation_and_geometry_point_size: bool, // shaderTessellationAndGeometryPointSize: VkBool32,
-	
-	/// shaderImageGatherExtended indicates whether the extended set of image gather instructions are available in shader code. If this feature is not enabled, the OpImage*Gather instructions do not support the Offset and ConstOffsets operands. This also indicates whether shader modules can declare the ImageGatherExtended capability.
-	pub shader_image_gather_extended: bool, // shaderImageGatherExtended: VkBool32,
-	
-	/// shaderStorageImageExtendedFormats indicates whether the extended storage image formats are available in shader code. If this feature is not enabled, the formats requiring the StorageImageExtendedFormats capability are not supported for storage images. This also indicates whether shader modules can declare the StorageImageExtendedFormats capability.
-	pub shader_storage_image_extended_formats: bool, // shaderStorageImageExtendedFormats: VkBool32,
-	
-	/// shaderStorageImageMultisample indicates whether multisampled storage images are supported. If this feature is not enabled, images that are created with a usage that includes VK_IMAGE_USAGE_STORAGE_BIT must be created with samples equal to VK_SAMPLE_COUNT_1_BIT. This also indicates whether shader modules can declare the StorageImageMultisample capability.
-	pub shader_storage_image_multisample: bool, // shaderStorageImageMultisample: VkBool32,
-	
-	/// shaderStorageImageReadWithoutFormat indicates whether storage images require a format qualifier to be specified when reading from storage images. If this feature is not enabled, the OpImageRead instruction must not have an OpTypeImage of Unknown. This also indicates whether shader modules can declare the StorageImageReadWithoutFormat capability.
-	pub shader_storage_image_read_without_format: bool, // shaderStorageImageReadWithoutFormat: VkBool32,
-	
-	/// shaderStorageImageWriteWithoutFormat indicates whether storage images require a format qualifier to be specified when writing to storage images. If this feature is not enabled, the OpImageWrite instruction must not have an OpTypeImage of Unknown. This also indicates whether shader modules can declare the StorageImageWriteWithoutFormat capability.
-	pub shader_storage_image_write_without_format: bool, // shaderStorageImageWriteWithoutFormat: VkBool32,
-	
-	/// shaderUniformBufferArrayDynamicIndexing indicates whether arrays of uniform buffers can be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER or VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC must be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules can declare the UniformBufferArrayDynamicIndexing capability.
-	pub shader_uniform_buffer_array_dynamic_indexing: bool, // shaderUniformBufferArrayDynamicIndexing: VkBool32,
-	
-	/// shaderSampledImageArrayDynamicIndexing indicates whether arrays of samplers or sampled images can be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of VK_DESCRIPTOR_TYPE_SAMPLER, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, or VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE must be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules can declare the SampledImageArrayDynamicIndexing capability.
-	pub shader_sampled_image_array_dynamic_indexing: bool, // shaderSampledImageArrayDynamicIndexing: VkBool32,
-	
-	/// shaderStorageBufferArrayDynamicIndexing indicates whether arrays of storage buffers can be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of VK_DESCRIPTOR_TYPE_STORAGE_BUFFER or VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC must be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules can declare the StorageBufferArrayDynamicIndexing capability.
-	pub shader_storage_buffer_array_dynamic_indexing: bool, // shaderStorageBufferArrayDynamicIndexing: VkBool32,
-	
-	/// shaderStorageImageArrayDynamicIndexing indicates whether arrays of storage images can be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of VK_DESCRIPTOR_TYPE_STORAGE_IMAGE must be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules can declare the StorageImageArrayDynamicIndexing capability.
-	pub shader_storage_image_array_dynamic_indexing: bool, // shaderStorageImageArrayDynamicIndexing: VkBool32,
-	
-	/// shaderClipDistance indicates whether clip distances are supported in shader code. If this feature is not enabled, the ClipDistance built-in decoration must not be used in shader modules. This also indicates whether shader modules can declare the ClipDistance capability.
-	pub shader_clip_distance: bool, // shaderClipDistance: VkBool32,
-	
-	/// shaderCullDistance indicates whether cull distances are supported in shader code. If this feature is not enabled, the CullDistance built-in decoration must not be used in shader modules. This also indicates whether shader modules can declare the CullDistance capability.
-	pub shader_cull_distance: bool, // shaderCullDistance: VkBool32,
-	
-	/// shaderFloat64 indicates whether 64-bit floats (doubles) are supported in shader code. If this feature is not enabled, 64-bit floating-point types must not be used in shader code. This also indicates whether shader modules can declare the Float64 capability.
-	pub shader_float64: bool, // shaderFloat64: VkBool32,
-	
-	/// shaderInt64 indicates whether 64-bit integers (signed and unsigned) are supported in shader code. If this feature is not enabled, 64-bit integer types must not be used in shader code. This also indicates whether shader modules can declare the Int64 capability.
-	pub shader_int64: bool, // shaderInt64: VkBool32,
-	
-	/// shaderInt16 indicates whether 16-bit integers (signed and unsigned) are supported in shader code. If this feature is not enabled, 16-bit integer types must not be used in shader code. This also indicates whether shader modules can declare the Int16 capability.
-	pub shader_int16: bool, // shaderInt16: VkBool32,
-	
-	/// shaderResourceResidency indicates whether image operations that return resource residency information are supported in shader code. If this feature is not enabled, the OpImageSparse* instructions must not be used in shader code. This also indicates whether shader modules can declare the SparseResidency capability. The feature requires at least one of the sparseResidency * features to be supported.
-	pub shader_resource_residency: bool, // shaderResourceResidency: VkBool32,
-	
-	/// shaderResourceMinLod indicates whether image operations that specify the minimum resource level-of-detail (LOD) are supported in shader code. If this feature is not enabled, the MinLod image operand must not be used in shader code. This also indicates whether shader modules can declare the MinLod capability.
-	pub shader_resource_min_lod: bool, // shaderResourceMinLod: VkBool32,
-	
-	/// sparseBinding indicates whether resource memory can be managed at opaque block level instead of at the object level. If this feature is not enabled, resource memory must be bound only on a per-object basis using the vkBindBufferMemory and vkBindImageMemory commands. In this case, buffers and images must not be created with VK_BUFFER_CREATE_SPARSE_BINDING_BIT and VK_IMAGE_CREATE_SPARSE_BINDING_BIT set in the flags member of the VkBufferCreateInfo and VkImageCreateInfo structures, respectively. Otherwise resource memory can be managed as described in Sparse Resource Features.
-	pub sparse_binding: bool, // sparseBinding: VkBool32,
-	
-	/// sparseResidencyBuffer indicates whether the device can access partially resident buffers. If this feature is not enabled, buffers must not be created with VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT set in the flags member of the VkBufferCreateInfo structure.
-	pub sparse_residency_buffer: bool, // sparseResidencyBuffer: VkBool32,
-	
-	pub sparse_residency_image_2d: bool, // sparseResidencyImage2D: VkBool32,
-	
-	/// sparseResidencyImage3D indicates whether the device can access partially resident 3D images. If this feature is not enabled, images with an imageType of VK_IMAGE_TYPE_3D must not be created with VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT set in the flags member of the VkImageCreateInfo structure.
-	pub sparse_residency_image_3d: bool, // sparseResidencyImage3D: VkBool32,
-	
-	/// sparseResidency2Samples indicates whether the physical device can access partially resident 2D images with 2 samples per pixel. If this feature is not enabled, images with an imageType of VK_IMAGE_TYPE_2D and samples set to VK_SAMPLE_COUNT_2_BIT must not be created with VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT set in the flags member of the VkImageCreateInfo structure.
-	pub sparse_residency_2_samples: bool, // sparseResidency2Samples: VkBool32,
-	
-	/// sparseResidency4Samples indicates whether the physical device can access partially resident 2D images with 4 samples per pixel. If this feature is not enabled, images with an imageType of VK_IMAGE_TYPE_2D and samples set to VK_SAMPLE_COUNT_4_BIT must not be created with VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT set in the flags member of the VkImageCreateInfo structure.
-	pub sparse_residency_4_samples: bool, // sparseResidency4Samples: VkBool32,
-	
-	/// sparseResidency8Samples indicates whether the physical device can access partially resident 2D images with 8 samples per pixel. If this feature is not enabled, images with an imageType of VK_IMAGE_TYPE_2D and samples set to VK_SAMPLE_COUNT_8_BIT must not be created with VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT set in the flags member of the VkImageCreateInfo structure.
-	pub sparse_residency_8_samples: bool, // sparseResidency8Samples: VkBool32,
-	
-	/// sparseResidency16Samples indicates whether the physical device can access partially resident 2D images with 16 samples per pixel. If this feature is not enabled, images with an imageType of VK_IMAGE_TYPE_2D and samples set to VK_SAMPLE_COUNT_16_BIT must not be created with VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT set in the flags member of the VkImageCreateInfo structure.
-	pub sparse_residency_16_samples: bool, // sparseResidency16Samples: VkBool32,
-	
-	/// sparseResidencyAliased indicates whether the physical device can correctly access data aliased into multiple locations. If this feature is not enabled, the VK_BUFFER_CREATE_SPARSE_ALIASED_BIT and VK_IMAGE_CREATE_SPARSE_ALIASED_BIT enum values must not be used in flags members of the VkBufferCreateInfo and VkImageCreateInfo structures, respectively.
-	pub sparse_residency_aliased: bool, // sparseResidencyAliased: VkBool32,
-	
-	/// variableMultisampleRate indicates whether all pipelines that will be bound to a command buffer during a subpass with no attachments must have the same value for VkPipelineMultisampleStateCreateInfo:: rasterizationSamples . If set to VK_TRUE, the implementation supports variable multisample rates in a subpass with no attachments. If set to VK_FALSE, then all pipelines bound in such a subpass must have the same multisample rate. This has no effect in situations where a subpass uses any attachments.
-	pub variable_multisampled_rate: bool, // variableMultisampleRate: VkBool32,
-	
-	/// inheritedQueries indicates whether a secondary command buffer may be executed while a query is active.
-	pub inherited_queries: bool, // inheritedQueries: VkBool32,
-	
-// }
-	
+	pub features: PhysicalDeviceFeatures,
 }
 
 
@@ -769,62 +536,7 @@ impl PhysicalDevice {
 			
 			queue_family_properties: Self::get_queue_family_properties(handle),
 
-			robust_buffer_access: features.robustBufferAccess != VK_FALSE,
-			full_draw_index_uint32: features.fullDrawIndexUint32 != VK_FALSE,
-			image_cube_array: features.imageCubeArray != VK_FALSE,
-			independent_blend: features.independentBlend != VK_FALSE,
-			geometry_shader: features.geometryShader != VK_FALSE,
-			tesselation_shader: features.tessellationShader != VK_FALSE,
-			sample_rate_shading: features.sampleRateShading != VK_FALSE,
-			dual_src_blend: features.dualSrcBlend != VK_FALSE,
-			logic_op: features.logicOp != VK_FALSE,
-			multi_draw_indirect: features.multiDrawIndirect != VK_FALSE,
-			draw_indirect_first_instance: features.drawIndirectFirstInstance != VK_FALSE,
-			depth_clamp: features.depthClamp != VK_FALSE,
-			depth_bias_clamp: features.depthBiasClamp != VK_FALSE,
-			fill_mode_non_solid: features.fillModeNonSolid != VK_FALSE,
-			depth_bounds: features.depthBounds != VK_FALSE,
-			wide_lines: features.wideLines != VK_FALSE,
-			large_points: features.largePoints != VK_FALSE,
-			alpha_to_one: features.alphaToOne != VK_FALSE,
-			multi_viewport: features.multiViewport != VK_FALSE,
-			sampler_anisotropy: features.samplerAnisotropy != VK_FALSE,
-			texture_compression_etc2: features.textureCompressionETC2 != VK_FALSE,
-			texture_compression_astc_ldr: features.textureCompressionASTC_LDR != VK_FALSE,
-			texture_compression_bc: features.textureCompressionBC != VK_FALSE,
-			occlusion_query_precise: features.occlusionQueryPrecise != VK_FALSE,
-			pipeline_statistics_query: features.pipelineStatisticsQuery != VK_FALSE,
-			vertex_pipeline_stores_and_atomics: features.vertexPipelineStoresAndAtomics != VK_FALSE,
-			fragment_stores_and_atomics: features.fragmentStoresAndAtomics != VK_FALSE,
-			shader_tesselation_and_geometry_point_size: features.shaderTessellationAndGeometryPointSize != VK_FALSE,
-			shader_image_gather_extended: features.shaderImageGatherExtended != VK_FALSE,
-			shader_storage_image_extended_formats: features.shaderStorageImageExtendedFormats != VK_FALSE,
-			shader_storage_image_multisample: features.shaderStorageImageMultisample != VK_FALSE,
-			shader_storage_image_read_without_format: features.shaderStorageImageReadWithoutFormat != VK_FALSE,
-			shader_storage_image_write_without_format: features.shaderStorageImageWriteWithoutFormat != VK_FALSE,
-			shader_uniform_buffer_array_dynamic_indexing: features.shaderUniformBufferArrayDynamicIndexing != VK_FALSE,
-			shader_sampled_image_array_dynamic_indexing: features.shaderSampledImageArrayDynamicIndexing != VK_FALSE,
-			shader_storage_buffer_array_dynamic_indexing: features.shaderStorageBufferArrayDynamicIndexing != VK_FALSE,
-			shader_storage_image_array_dynamic_indexing: features.shaderStorageImageArrayDynamicIndexing != VK_FALSE,
-			shader_clip_distance: features.shaderClipDistance != VK_FALSE,
-			shader_cull_distance: features.shaderCullDistance != VK_FALSE,
-			shader_float64: features.shaderFloat64 != VK_FALSE,
-			shader_int64: features.shaderInt64 != VK_FALSE,
-			shader_int16: features.shaderInt16 != VK_FALSE,
-			shader_resource_residency: features.shaderResourceResidency != VK_FALSE,
-			shader_resource_min_lod: features.shaderResourceMinLod != VK_FALSE,
-			sparse_binding: features.sparseBinding != VK_FALSE,
-			sparse_residency_buffer: features.sparseResidencyBuffer != VK_FALSE,
-			sparse_residency_image_2d: features.sparseResidencyImage2D != VK_FALSE,
-			sparse_residency_image_3d: features.sparseResidencyImage3D != VK_FALSE,
-			sparse_residency_2_samples: features.sparseResidency2Samples != VK_FALSE,
-			sparse_residency_4_samples: features.sparseResidency4Samples != VK_FALSE,
-			sparse_residency_8_samples: features.sparseResidency8Samples != VK_FALSE,
-			sparse_residency_16_samples: features.sparseResidency16Samples != VK_FALSE,
-			sparse_residency_aliased: features.sparseResidencyAliased != VK_FALSE,
-			variable_multisampled_rate: features.variableMultisampleRate != VK_FALSE,
-			inherited_queries: features.inheritedQueries != VK_FALSE,
-		
+			features: PhysicalDeviceFeatures::from(features),
 		}
 	}
 
@@ -845,68 +557,147 @@ impl PhysicalDevice {
 	    
 		queue_family_properties.truncate(queue_family_property_count as usize);
 		
-		let mapper = |queue_family_properties| QueueFamilyProperties::from_raw(queue_family_properties);
-		queue_family_properties.iter().map(|item| mapper(item)).collect::<Vec<QueueFamilyProperties>>()
+		//let mapper = |queue_family_properties| QueueFamilyProperties::from(queue_family_properties);
+		queue_family_properties.iter().map(|item| QueueFamilyProperties::from(item)).collect::<Vec<QueueFamilyProperties>>()
     }
 
+	// TODO use some predefined Display, Debug, ToString, whatever trait or at least replace by a macro
+	pub fn dump(&self, prefix: &str) {
+		
+		let mut indent: String = String::from(prefix);
+		indent.push('\t');
+		
+		println!("{}handle: {:?}", prefix, self.handle);
 
+		println!("{}api_version: {:?}", prefix, self.api_version);
+		println!("{}driver_version: {:?}", prefix, self.driver_version);
+		println!("{}vendor_id: {:?}", prefix, self.vendor_id);
+		println!("{}device_id: {:?}", prefix, self.device_id);
+		println!("{}device_type: {:?}", prefix, self.device_type);
+		println!("{}device_name: {:?}", prefix, self.device_name);
+		println!("{}pipeline_cache_uuid: {:?}", prefix, self.pipeline_cache_uuid);
 
-//    fn get_features(handle: VkPhysicalDevice) -> VkPhysicalDeviceFeatures {
-//    	
-//   		let mut queue_family_property_count: u32 = 0;
-//    	
-//    	// query number of properties available to this device
-//		unsafe { vkGetPhysicalDeviceQueueFamilyProperties(handle, &mut queue_family_property_count, ptr::null_mut()) };
-//		
-//		// create result buffer
-//		let mut queue_family_properties = Vec::with_capacity(queue_family_property_count as usize);
-//		queue_family_properties.resize(queue_family_property_count as usize, VkQueueFamilyProperties::default());
-//		
-//		// fill the result buffer
-//		unsafe { vkGetPhysicalDeviceQueueFamilyProperties(handle, &mut queue_family_property_count, queue_family_properties.as_mut_ptr()) };
-//	    
-//		queue_family_properties.truncate(queue_family_property_count as usize);
-//		
-//		let mapper = |queue_family_properties| QueueFamilyProperties::from_raw(queue_family_properties);
-//		queue_family_properties.iter().map(|item| mapper(item)).collect::<Vec<QueueFamilyProperties>>()
-//    }
+		println!("{}max_image_dimension_1d: {:?}", prefix, self.max_image_dimension_1d);
+		println!("{}max_image_dimension_2d: {:?}", prefix, self.max_image_dimension_2d);
+		println!("{}max_image_dimension_3d: {:?}", prefix, self.max_image_dimension_3d);
+		println!("{}max_image_dimension_cube: {:?}", prefix, self.max_image_dimension_cube);
+		println!("{}max_image_array_layers: {:?}", prefix, self.max_image_array_layers);
+		println!("{}max_texel_buffer_elements: {:?}", prefix, self.max_texel_buffer_elements);
+		println!("{}max_uniform_buffer_range: {:?}", prefix, self.max_uniform_buffer_range);
+		println!("{}max_storage_buffer_range: {:?}", prefix, self.max_storage_buffer_range);
+		println!("{}max_push_constants_size: {:?}", prefix, self.max_push_constants_size);
+		println!("{}max_memory_allocation_count: {:?}", prefix, self.max_memory_allocation_count);
+		println!("{}max_sample_allocation_count: {:?}", prefix, self.max_sample_allocation_count);
+		println!("{}buffer_image_granularity: {:?}", prefix, self.buffer_image_granularity);
+		println!("{}sparse_address_space_size: {:?}", prefix, self.sparse_address_space_size);
+		println!("{}max_bound_descriptor_sets: {:?}", prefix, self.max_bound_descriptor_sets);
+		println!("{}max_per_stage_descriptor_samplers: {:?}", prefix, self.max_per_stage_descriptor_samplers);
+		println!("{}max_per_stage_descriptor_uniform_buffers: {:?}", prefix, self.max_per_stage_descriptor_uniform_buffers);
+		println!("{}max_per_stage_descriptor_storage_buffers: {:?}", prefix, self.max_per_stage_descriptor_storage_buffers);
+		println!("{}max_per_stage_descriptor_sampled_images: {:?}", prefix, self.max_per_stage_descriptor_sampled_images);
+		println!("{}max_per_stage_descriptor_storage_images: {:?}", prefix, self.max_per_stage_descriptor_storage_images);
+		println!("{}max_per_stage_descriptor_input_attachments: {:?}", prefix, self.max_per_stage_descriptor_input_attachments);
+		println!("{}max_per_stage_resources: {:?}", prefix, self.max_per_stage_resources);
+		println!("{}max_descriptor_set_samplers: {:?}", prefix, self.max_descriptor_set_samplers);
+		println!("{}max_descriptor_set_uniform_buffers: {:?}", prefix, self.max_descriptor_set_uniform_buffers);
+		println!("{}max_descriptor_set_uniform_buffers_dynamic: {:?}", prefix, self.max_descriptor_set_uniform_buffers_dynamic);
+		println!("{}max_descriptor_set_storage_buffers: {:?}", prefix, self.max_descriptor_set_storage_buffers);
+		println!("{}max_descriptor_set_storage_buffers_dynamic: {:?}", prefix, self.max_descriptor_set_storage_buffers_dynamic);
+		println!("{}max_descriptor_set_samples_images: {:?}", prefix, self.max_descriptor_set_samples_images);
+		println!("{}max_descriptor_set_storage_images: {:?}", prefix, self.max_descriptor_set_storage_images);
+		println!("{}max_descriptor_set_input_attachments: {:?}", prefix, self.max_descriptor_set_input_attachments);
+		println!("{}max_vertex_input_attributes: {:?}", prefix, self.max_vertex_input_attributes);
+		println!("{}max_vertex_input_bindings: {:?}", prefix, self.max_vertex_input_bindings);
+		println!("{}max_vertex_input_attribute_offset: {:?}", prefix, self.max_vertex_input_attribute_offset);
+		println!("{}max_vertex_input_binding_stride: {:?}", prefix, self.max_vertex_input_binding_stride);
+		println!("{}max_vertex_output_components: {:?}", prefix, self.max_vertex_output_components);
+		println!("{}max_tesselation_generation_level: {:?}", prefix, self.max_tesselation_generation_level);
+		println!("{}max_tesselation_patch_size: {:?}", prefix, self.max_tesselation_patch_size);
+		println!("{}max_tesselation_control_per_vertex_input_components: {:?}", prefix, self.max_tesselation_control_per_vertex_input_components);
+		println!("{}max_tesselation_control_per_vertex_output_components: {:?}", prefix, self.max_tesselation_control_per_vertex_output_components);
+		println!("{}max_tesselation_control_per_patch_output_components: {:?}", prefix, self.max_tesselation_control_per_patch_output_components);
+		println!("{}max_tesselation_control_total_output_components: {:?}", prefix, self.max_tesselation_control_total_output_components);
+		println!("{}max_tesselation_evaluation_input_components: {:?}", prefix, self.max_tesselation_evaluation_input_components);
+		println!("{}max_tesselation_evaluation_output_components: {:?}", prefix, self.max_tesselation_evaluation_output_components);
+		println!("{}max_geometry_shader_invocations: {:?}", prefix, self.max_geometry_shader_invocations);
+		println!("{}max_geometry_input_components: {:?}", prefix, self.max_geometry_input_components);
+		println!("{}max_geometry_output_components: {:?}", prefix, self.max_geometry_output_components);
+		println!("{}max_geometry_output_vertices: {:?}", prefix, self.max_geometry_output_vertices);
+		println!("{}max_geometry_total_output_components: {:?}", prefix, self.max_geometry_total_output_components);
+		println!("{}max_fragment_input_components: {:?}", prefix, self.max_fragment_input_components);
+		println!("{}max_fragment_output_attachments: {:?}", prefix, self.max_fragment_output_attachments);
+		println!("{}max_fragment_dual_src_attachments: {:?}", prefix, self.max_fragment_dual_src_attachments);
+		println!("{}max_fragment_combined_output_resources: {:?}", prefix, self.max_fragment_combined_output_resources);
+		println!("{}max_compute_shared_memory_size: {:?}", prefix, self.max_compute_shared_memory_size);
+		println!("{}max_compute_work_group_count: {:?}", prefix, self.max_compute_work_group_count);
+		println!("{}max_compute_work_group_invocations: {:?}", prefix, self.max_compute_work_group_invocations);
+		println!("{}max_compute_work_group_size: {:?}", prefix, self.max_compute_work_group_size);
+		println!("{}sub_pixel_precision_bits: {:?}", prefix, self.sub_pixel_precision_bits);
+		println!("{}sub_texel_precision_bits: {:?}", prefix, self.sub_texel_precision_bits);
+		println!("{}mipmap_precision_bits: {:?}", prefix, self.mipmap_precision_bits);
+		println!("{}max_draw_indexed_index_value: {:?}", prefix, self.max_draw_indexed_index_value);
+		println!("{}max_draw_indirect_count: {:?}", prefix, self.max_draw_indirect_count);
+		println!("{}max_sampler_lod_bias: {:?}", prefix, self.max_sampler_lod_bias);
+		println!("{}max_sampler_anisotropy: {:?}", prefix, self.max_sampler_anisotropy);
+		println!("{}max_viewports: {:?}", prefix, self.max_viewports);
+		println!("{}max_viewport_dimensions: {:?}", prefix, self.max_viewport_dimensions);
+		println!("{}viewport_bounds_range: {:?}", prefix, self.viewport_bounds_range);
+		println!("{}viewport_sub_pixel_bits: {:?}", prefix, self.viewport_sub_pixel_bits);
+		println!("{}min_memory_map_alignment: {:?}", prefix, self.min_memory_map_alignment);
+		println!("{}min_texel_buffer_offset_alignment: {:?}", prefix, self.min_texel_buffer_offset_alignment);
+		println!("{}min_uniform_buffer_offset_alignment: {:?}", prefix, self.min_uniform_buffer_offset_alignment);
+		println!("{}min_storage_buffer_offset_alignment: {:?}", prefix, self.min_storage_buffer_offset_alignment);
+		println!("{}min_texel_offset: {:?}", prefix, self.min_texel_offset);
+		println!("{}max_texel_offset: {:?}", prefix, self.max_texel_offset);
+		println!("{}min_texel_gather_offset: {:?}", prefix, self.min_texel_gather_offset);
+		println!("{}max_texel_gather_offset: {:?}", prefix, self.max_texel_gather_offset);
+		println!("{}min_interpolation_offset: {:?}", prefix, self.min_interpolation_offset);
+		println!("{}max_interpolation_offset: {:?}", prefix, self.max_interpolation_offset);
+		println!("{}sub_pixel_interpolation_offset_bits: {:?}", prefix, self.sub_pixel_interpolation_offset_bits);
+		println!("{}max_framebuffer_width: {:?}", prefix, self.max_framebuffer_width);
+		println!("{}max_framebuffer_height: {:?}", prefix, self.max_framebuffer_height);
+		println!("{}max_framebuffer_layers: {:?}", prefix, self.max_framebuffer_layers);
+		println!("{}framebuffer_color_sample_counts: {:?}", prefix, self.framebuffer_color_sample_counts);
+		println!("{}framebuffer_depth_sample_counts: {:?}", prefix, self.framebuffer_depth_sample_counts);
+		println!("{}framebuffer_stencil_sample_counts: {:?}", prefix, self.framebuffer_stencil_sample_counts);
+		println!("{}framebuffer_no_attachments_sample_counts: {:?}", prefix, self.framebuffer_no_attachments_sample_counts);
+		println!("{}max_color_attachments: {:?}", prefix, self.max_color_attachments);
+		println!("{}sampled_image_color_sample_counts: {:?}", prefix, self.sampled_image_color_sample_counts);
+		println!("{}sampled_image_integer_sample_counts: {:?}", prefix, self.sampled_image_integer_sample_counts);
+		println!("{}sampled_image_depth_sample_counts: {:?}", prefix, self.sampled_image_depth_sample_counts);
+		println!("{}sampled_image_stencil_sample_counts: {:?}", prefix, self.sampled_image_stencil_sample_counts);
+		println!("{}storage_image_sample_counts: {:?}", prefix, self.storage_image_sample_counts);
+		println!("{}max_sample_mask_words: {:?}", prefix, self.max_sample_mask_words);
+		println!("{}timestamp_compute_and_graphics: {:?}", prefix, self.timestamp_compute_and_graphics);
+		println!("{}timestamp_period: {:?}", prefix, self.timestamp_period);
+		println!("{}max_clip_distances: {:?}", prefix, self.max_clip_distances);
+		println!("{}max_cull_distances: {:?}", prefix, self.max_cull_distances);
+		println!("{}max_combined_clip_and_cull_distances: {:?}", prefix, self.max_combined_clip_and_cull_distances);
+		println!("{}discrete_queue_priorities: {:?}", prefix, self.discrete_queue_priorities);
+		println!("{}point_size_range: {:?}", prefix, self.point_size_range);
+		println!("{}line_width_range: {:?}", prefix, self.line_width_range);
+		println!("{}point_size_granularity: {:?}", prefix, self.point_size_granularity);
+		println!("{}line_width_granularity: {:?}", prefix, self.line_width_granularity);
+		println!("{}strict_lines: {:?}", prefix, self.strict_lines);
+		println!("{}standard_sample_locations: {:?}", prefix, self.standard_sample_locations);
+		println!("{}optimal_buffer_copy_offset_alignment: {:?}", prefix, self.optimal_buffer_copy_offset_alignment);
+		println!("{}optimal_buffer_copy_row_pitch_alignment: {:?}", prefix, self.optimal_buffer_copy_row_pitch_alignment);
+		println!("{}non_coherent_atom_size: {:?}", prefix, self.non_coherent_atom_size);
 
-}
-
-#[derive(Debug)]
-pub struct QueueFamilyProperties {
-	
-	/// if true, then the queues in this queue family support graphics operations.
-	is_graphics: bool,
-	/// if true, then the queues in this queue family support compute operations.
-	is_compute: bool,
-	/// if true, then the queues in this queue family support transfer operations.
-	is_transfer: bool,
-	/// if true, then the queues in this queue family support sparse memory management operations (see Sparse Resources). If any of the sparse resource features are enabled, then at least one queue family must support this bit.	
-	is_sparse_binding: bool,
-	
-	/// the unsigned integer count of queues in this queue family.
-	queue_count: u32,
-	
-	/// the unsigned integer count of meaningful bits in the timestamps written via vkCmdWriteTimestamp. The valid range for the count is 36..64 bits, or a value of 0, indicating no support for timestamps. Bits outside the valid range are guaranteed to be zeros.
-	timestamp_valid_bits: u32,
-	
-	/// the minimum granularity supported for image transfer operations on the queues in this queue family.
-	min_image_transfer_granularity: [u32; 3],
-}
-
-impl QueueFamilyProperties {
-	
-	pub fn from_raw(queue_family_properties: &VkQueueFamilyProperties) -> Self {
-		QueueFamilyProperties {
-			is_graphics: queue_family_properties.queueFlags.contains(VK_QUEUE_GRAPHICS_BIT),
-			is_compute: queue_family_properties.queueFlags.contains(VK_QUEUE_COMPUTE_BIT),
-			is_transfer: queue_family_properties.queueFlags.contains(VK_QUEUE_TRANSFER_BIT),
-			is_sparse_binding: queue_family_properties.queueFlags.contains(VK_QUEUE_SPARSE_BINDING_BIT),
-			queue_count: queue_family_properties.queueCount,
-			timestamp_valid_bits: queue_family_properties.timestampValidBits,
-			min_image_transfer_granularity: [queue_family_properties.minImageTransferGranularity.width, queue_family_properties.minImageTransferGranularity.height, queue_family_properties.minImageTransferGranularity.depth],
+		println!("{}residency_standard_2d_block_shape: {:?}", prefix, self.residency_standard_2d_block_shape);
+		println!("{}residency_standard_2d_multisample_block_shape: {:?}", prefix, self.residency_standard_2d_multisample_block_shape);
+		println!("{}residency_standard_3d_block_shape: {:?}", prefix, self.residency_standard_3d_block_shape);
+		println!("{}residency_aligned_mip_size: {:?}", prefix, self.residency_aligned_mip_size);
+		println!("{}residency_non_resident_strict: {:?}", prefix, self.residency_non_resident_strict);
+		
+		for properties in &self.queue_family_properties {
+			println!("{}queue_family_properties[]: {{", prefix);
+			properties.dump(&indent);
+			println!("{}}}", prefix);
 		}
+
+		println!("{}features: {{", prefix);
+		self.features.dump(&indent);
+		println!("{}}}", prefix);
 	}
-	
 }

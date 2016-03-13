@@ -1,17 +1,10 @@
 #[macro_use]
 extern crate bitflags;
-
 extern crate libc;
 
 mod vk;
 mod krust;
 
-//use vk::enums::*;
-//use vk::flags::*;
-//use vk::fns::*;
-//use vk::structs::*;
-//use vk::types::*;
-//use std::ptr;
 use std::option::Option;
 
 use krust::instance::Instance;
@@ -27,8 +20,10 @@ fn main() {
 
 	let physical_devices = instance.enumerate_physical_devices().unwrap();
 
-	for physical_device in physical_devices.iter() {
-		println!("Physical device: {:?}", physical_device);
+	for physical_device in &physical_devices {
+		println!("PhysicalDevice {{");
+		physical_device.dump("\t");
+		println!("}}");
 	}
 
 }

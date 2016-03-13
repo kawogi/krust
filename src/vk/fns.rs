@@ -38,6 +38,7 @@ extern "stdcall" {
 	//void vkGetPhysicalDeviceFeatures(
 	//    VkPhysicalDevice physicalDevice,
 	//    VkPhysicalDeviceFeatures* pFeatures);
+	/// physical_device::PhysicalDevice::create(handle: VkPhysicalDevice) -> Self
 	pub fn vkGetPhysicalDeviceFeatures(physicalDevice: VkPhysicalDevice, pFeatures: *mut VkPhysicalDeviceFeatures);
     
 	//void vkGetPhysicalDeviceFormatProperties(
