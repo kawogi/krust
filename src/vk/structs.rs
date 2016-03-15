@@ -265,7 +265,6 @@ pub struct VkPhysicalDeviceSparseProperties {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 #[derive(Default)]
 pub struct VkPhysicalDeviceProperties {
 	pub apiVersion: u32,
@@ -273,17 +272,17 @@ pub struct VkPhysicalDeviceProperties {
 	pub vendorID: u32,
 	pub deviceID: u32,
 	pub deviceType: VkPhysicalDeviceType,
-	pub deviceName: DeviceNameBuffer, //[libc::c_uchar; VK_MAX_PHYSICAL_DEVICE_NAME_SIZE],
+	pub deviceName: DeviceNameSlice, //[libc::c_uchar; VK_MAX_PHYSICAL_DEVICE_NAME_SIZE],
 	pub pipelineCacheUUID: [u8; VK_UUID_SIZE],
 	pub limits: VkPhysicalDeviceLimits,
 	pub sparseProperties: VkPhysicalDeviceSparseProperties,
 }
 
 #[repr(C)]
-pub struct DeviceNameBuffer(pub [u8; 256]);
+pub struct DeviceNameSlice(pub [libc::c_uchar; VK_MAX_PHYSICAL_DEVICE_NAME_SIZE]);
 
-impl Default for DeviceNameBuffer {
-    fn default() -> Self { DeviceNameBuffer([0; 256]) }
+impl Default for DeviceNameSlice {
+    fn default() -> Self { DeviceNameSlice([libc::c_uchar::default(); VK_MAX_PHYSICAL_DEVICE_NAME_SIZE]) }
 }
 
 
@@ -301,6 +300,7 @@ pub struct VkQueueFamilyProperties {
 #[repr(C)]
 #[allow(non_snake_case)]
 #[allow(dead_code)]
+#[derive(Default, Debug, Clone, Copy)]
 pub struct VkMemoryType {
 	pub propertyFlags: VkMemoryPropertyFlags,
 	pub heapIndex: u32,
@@ -309,6 +309,7 @@ pub struct VkMemoryType {
 #[repr(C)]
 #[allow(non_snake_case)]
 #[allow(dead_code)]
+#[derive(Default, Debug, Clone, Copy)]
 pub struct VkMemoryHeap {
 	pub size: VkDeviceSize,
 	pub flags: VkMemoryHeapFlags,
@@ -317,11 +318,26 @@ pub struct VkMemoryHeap {
 #[repr(C)]
 #[allow(non_snake_case)]
 #[allow(dead_code)]
+#[derive(Default)]
 pub struct VkPhysicalDeviceMemoryProperties {
 	pub memoryTypeCount: u32,
-	pub memoryTypes: [VkMemoryType; VK_MAX_MEMORY_TYPES],
+	pub memoryTypes: MemoryTypesSlice, //[VkMemoryType; VK_MAX_MEMORY_TYPES],
 	pub memoryHeapCount: u32,
-	pub memoryHeaps: [VkMemoryHeap; VK_MAX_MEMORY_HEAPS],
+	pub memoryHeaps: MemoryHeapsSlice, //[VkMemoryHeap; VK_MAX_MEMORY_HEAPS],
+}
+
+#[repr(C)]
+pub struct MemoryTypesSlice(pub [VkMemoryType; VK_MAX_MEMORY_TYPES]);
+
+impl Default for MemoryTypesSlice {
+    fn default() -> Self { MemoryTypesSlice([VkMemoryType::default(); VK_MAX_MEMORY_TYPES]) }
+}
+
+#[repr(C)]
+pub struct MemoryHeapsSlice(pub [VkMemoryHeap; VK_MAX_MEMORY_HEAPS]);
+
+impl Default for MemoryHeapsSlice {
+    fn default() -> Self { MemoryHeapsSlice([VkMemoryHeap::default(); VK_MAX_MEMORY_HEAPS]) }
 }
 
 #[repr(C)]
@@ -362,13 +378,48 @@ pub struct VkExtensionProperties {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
+#[derive(Default, Clone)]
 pub struct VkLayerProperties {
-	pub layerName: [libc::c_uchar; VK_MAX_EXTENSION_NAME_SIZE],
+	pub layerName: LayerNameSlice, //[libc::c_uchar; VK_MAX_EXTENSION_NAME_SIZE],
 	pub specVersion: u32,
 	pub implementationVersion: u32,
-	pub description: [libc::c_uchar; VK_MAX_DESCRIPTION_SIZE],
+	pub description: DescriptionSlice, //[libc::c_uchar; VK_MAX_DESCRIPTION_SIZE],
 }
+
+#[repr(C)]
+pub struct LayerNameSlice(pub [libc::c_uchar; VK_MAX_EXTENSION_NAME_SIZE]);
+
+impl Default for LayerNameSlice {
+    fn default() -> Self { LayerNameSlice([libc::c_uchar::default(); VK_MAX_EXTENSION_NAME_SIZE]) }
+}
+
+// TODO isn't there an easier way?
+impl Clone for LayerNameSlice {
+    fn clone(&self) -> Self {
+    	//*self
+    	let mut result = [libc::c_uchar::default(); VK_MAX_EXTENSION_NAME_SIZE];
+    	result.clone_from_slice(&self.0);
+    	LayerNameSlice(result)
+    }
+}
+
+#[repr(C)]
+pub struct DescriptionSlice(pub [libc::c_uchar; VK_MAX_DESCRIPTION_SIZE]);
+
+impl Default for DescriptionSlice {
+    fn default() -> Self { DescriptionSlice([libc::c_uchar::default(); VK_MAX_DESCRIPTION_SIZE]) }
+}
+
+// TODO isn't there an easier way?
+impl Clone for DescriptionSlice {
+    fn clone(&self) -> Self {
+    	let mut result = [libc::c_uchar::default(); VK_MAX_EXTENSION_NAME_SIZE];
+    	result.clone_from_slice(&self.0);
+    	DescriptionSlice(result)
+    }
+}
+
+
 
 #[repr(C)]
 #[allow(non_snake_case)]

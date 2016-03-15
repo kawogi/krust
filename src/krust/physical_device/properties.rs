@@ -41,7 +41,7 @@ impl From<VkPhysicalDeviceProperties> for PhysicalDeviceProperties {
 
 		// TODO there has to be a std-solution somewhere
 		let device_name = {
-			let &DeviceNameBuffer(device_name_bytes) = &properties.deviceName;
+			let &DeviceNameSlice(device_name_bytes) = &properties.deviceName;
 			let device_name_len = device_name_bytes.iter().position(|&c| c == 0).unwrap_or(device_name_bytes.len());
 			String::from_utf8_lossy(&device_name_bytes[0..device_name_len]).into_owned()
 		};
