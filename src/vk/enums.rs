@@ -149,6 +149,7 @@ pub enum VkInternalAllocationType {
 #[repr(C)]
 #[allow(dead_code)]
 #[allow(non_camel_case_types)]
+#[derive(Clone, Copy)]
 pub enum VkFormat {
 	VK_FORMAT_UNDEFINED = 0,
 	VK_FORMAT_R4G4_UNORM_PACK8 = 1,
@@ -344,6 +345,7 @@ pub enum VkFormat {
 #[repr(C)]
 #[allow(dead_code)]
 #[allow(non_camel_case_types)]
+#[derive(Clone, Copy)]
 pub enum VkImageType {
 	VK_IMAGE_TYPE_1D = 0,
 	VK_IMAGE_TYPE_2D = 1,
@@ -356,7 +358,7 @@ pub enum VkImageType {
 
 #[repr(C)]
 #[allow(dead_code)]
-#[allow(non_camel_case_types)]
+#[derive(Clone, Copy)]
 pub enum VkImageTiling {
 	VK_IMAGE_TILING_OPTIMAL = 0,
 	VK_IMAGE_TILING_LINEAR = 1,

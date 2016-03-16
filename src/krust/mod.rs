@@ -1,5 +1,9 @@
+pub mod extension_properties;
+pub mod layer_properties;
 pub mod instance;
 pub mod physical_device;
+pub mod queue_family_properties;
+pub mod sparse_image_format_properties;
 
 
 // TODO make proper comment

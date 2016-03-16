@@ -236,7 +236,7 @@ extern "stdcall" {
 	//    u32* pPropertyCount,
 	//    VkSparseImageFormatProperties* pProperties);
 	/// TODO add to PhysicalDevice 
-	pub fn vkGetPhysicalDeviceSparseImageFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, type_: VkImageType, samples: VkSampleCountFlagBits, usage: VkImageUsageFlags, tiling: VkImageTiling, pPropertyCount: *mut u32, pProperties: *mut VkSparseImageFormatProperties);
+	pub fn vkGetPhysicalDeviceSparseImageFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, type_: VkImageType, samples: VkSampleCountFlags, usage: VkImageUsageFlags, tiling: VkImageTiling, pPropertyCount: *mut u32, pProperties: *mut VkSparseImageFormatProperties);
 	
 	//VkResult vkQueueBindSparse(
 	//    VkQueue                                     queue,

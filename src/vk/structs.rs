@@ -110,7 +110,7 @@ pub struct VkPhysicalDeviceFeatures {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
+#[derive(Default)]
 pub struct VkFormatProperties {
 	pub linearTilingFeatures: VkFormatFeatureFlags,
 	pub optimalTilingFeatures: VkFormatFeatureFlags,
@@ -120,7 +120,7 @@ pub struct VkFormatProperties {
 #[repr(C)]
 #[allow(non_snake_case)]
 #[allow(dead_code)]
-#[derive(Clone, Default)]
+#[derive(Debug, Clone, Copy, Default)]
 pub struct VkExtent3D {
 	pub width: u32,
 	pub height: u32,
@@ -129,7 +129,7 @@ pub struct VkExtent3D {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
+#[derive(Default)]
 pub struct VkImageFormatProperties {
 	pub maxExtent: VkExtent3D,
 	pub maxMipLevels: u32,
@@ -370,10 +370,27 @@ pub struct VkDeviceCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
+#[derive(Default, Clone)]
 pub struct VkExtensionProperties {
-	pub extensionName: [libc::c_uchar; VK_MAX_EXTENSION_NAME_SIZE],
+	pub extensionName: ExtensionNameSlice, //[libc::c_uchar; VK_MAX_EXTENSION_NAME_SIZE],
 	pub specVersion: u32,
+}
+
+#[repr(C)]
+pub struct ExtensionNameSlice(pub [libc::c_uchar; VK_MAX_EXTENSION_NAME_SIZE]);
+
+impl Default for ExtensionNameSlice {
+    fn default() -> Self { ExtensionNameSlice([libc::c_uchar::default(); VK_MAX_EXTENSION_NAME_SIZE]) }
+}
+
+// TODO isn't there an easier way?
+impl Clone for ExtensionNameSlice {
+    fn clone(&self) -> Self {
+    	//*self
+    	let mut result = Self::default().0;
+    	result.clone_from_slice(&self.0);
+    	ExtensionNameSlice(result)
+    }
 }
 
 #[repr(C)]
@@ -468,7 +485,7 @@ pub struct VkMemoryRequirements {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
+#[derive(Default, Clone)]
 pub struct VkSparseImageFormatProperties {
 	pub aspectMask: VkImageAspectFlags,
 	pub imageGranularity: VkExtent3D,
@@ -650,7 +667,7 @@ pub struct VkImageCreateInfo {
 	pub extent: VkExtent3D,
 	pub mipLevels: u32,
 	pub arrayLayers: u32,
-	pub samples: VkSampleCountFlagBits,
+	pub samples: VkSampleCountFlags,
 	pub tiling: VkImageTiling,
 	pub usage: VkImageUsageFlags,
 	pub sharingMode: VkSharingMode,
@@ -887,7 +904,7 @@ pub struct VkPipelineMultisampleStateCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
 	pub flags: VkPipelineMultisampleStateCreateFlags,
-	pub rasterizationSamples: VkSampleCountFlagBits,
+	pub rasterizationSamples: VkSampleCountFlags,
 	pub sampleShadingEnable: VkBool32,
 	pub minSampleShading: f32,
 	pub pSampleMask: *const VkSampleMask,
@@ -1172,7 +1189,7 @@ pub struct VkFramebufferCreateInfo {
 pub struct VkAttachmentDescription {
 	pub flags: VkAttachmentDescriptionFlags,
 	pub format: VkFormat,
-	pub samples: VkSampleCountFlagBits,
+	pub samples: VkSampleCountFlags,
 	pub loadOp: VkAttachmentLoadOp,
 	pub storeOp: VkAttachmentStoreOp,
 	pub stencilLoadOp: VkAttachmentLoadOp,

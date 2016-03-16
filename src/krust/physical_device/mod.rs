@@ -1,20 +1,21 @@
 extern crate libc;
 
-mod properties;
-mod limits;
-mod sparse_properties;
 mod features;
-mod queue_family_properties;
+mod limits;
 mod memory_properties;
-mod layer_properties;
+mod properties;
+mod sparse_properties;
 
-pub use self::properties::PhysicalDeviceProperties;
-pub use self::limits::PhysicalDeviceLimits;
-pub use self::sparse_properties::PhysicalDeviceSparseProperties;
 pub use self::features::PhysicalDeviceFeatures;
-pub use self::queue_family_properties::QueueFamilyProperties;
+pub use self::limits::PhysicalDeviceLimits;
 pub use self::memory_properties::PhysicalDeviceMemoryProperties;
-pub use self::layer_properties::LayerProperties;
+pub use self::properties::PhysicalDeviceProperties;
+pub use self::sparse_properties::PhysicalDeviceSparseProperties;
+
+use krust::extension_properties::ExtensionProperties;
+use krust::sparse_image_format_properties::SparseImageFormatProperties;
+use krust::queue_family_properties::QueueFamilyProperties;
+use krust::layer_properties::LayerProperties;
 
 use std::ptr;
 use std::vec::Vec;
@@ -22,6 +23,8 @@ use std::vec::Vec;
 use vk::fns::*;
 use vk::structs::*;
 use vk::types::*;
+use vk::enums::*;
+use vk::flags::*;
 
 
 #[derive(Debug)]
@@ -66,9 +69,69 @@ impl PhysicalDevice {
 	// pub fn vkCreateDevice(physicalDevice: VkPhysicalDevice, pCreateInfo: *const VkDeviceCreateInfo, pAllocator: *const VkAllocationCallbacks, pDevice: *mut VkDevice) -> VkResult;
 
 	// pub fn vkGetPhysicalDeviceFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, pFormatProperties: *mut VkFormatProperties);
+	#[allow(dead_code)]
+	// TODO change to result type FormatProperties
+	pub fn get_format_properties(&self, format: VkFormat) -> VkFormatProperties {
+		let mut format_properties = VkFormatProperties::default(); 
+		unsafe { vkGetPhysicalDeviceFormatProperties(self.handle, format, &mut format_properties) };
+		
+		format_properties
+	}
+	
 	// pub fn vkGetPhysicalDeviceImageFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, type_: VkImageType, tiling: VkImageTiling, usage: VkImageUsageFlags, flags: VkImageCreateFlags, pImageFormatProperties: *mut VkImageFormatProperties) -> VkResult;
-	// pub fn vkEnumerateDeviceExtensionProperties(physicalDevice: VkPhysicalDevice, pLayerName: *const u8, pPropertyCount: *mut u32, pProperties: *mut VkExtensionProperties) -> VkResult;
+	#[allow(dead_code)]
+	// TODO change to result type ImageFormatProperties
+	pub fn get_image_format_properties(&self, format: VkFormat, type_: VkImageType, tiling: VkImageTiling, usage: VkImageUsageFlags, flags: VkImageCreateFlags) -> Result<VkImageFormatProperties, VkResult> {
+		let mut image_format_properties = VkImageFormatProperties::default();
+		let result = unsafe { vkGetPhysicalDeviceImageFormatProperties(self.handle, format, type_, tiling, usage, flags, &mut image_format_properties) };
+	    if result != VkResult::VK_SUCCESS { return Err(result); }
+		
+		Ok(image_format_properties)
+	}
+	
 	// pub fn vkGetPhysicalDeviceSparseImageFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, type_: VkImageType, samples: VkSampleCountFlagBits, usage: VkImageUsageFlags, tiling: VkImageTiling, pPropertyCount: *mut u32, pProperties: *mut VkSparseImageFormatProperties);
+	#[allow(dead_code)]
+	pub fn get_sparse_image_format_properties(&self, format: VkFormat, type_: VkImageType, samples: VkSampleCountFlags, usage: VkImageUsageFlags, tiling: VkImageTiling) -> Vec<SparseImageFormatProperties> {
+   		let mut sparse_image_format_properties_count: u32 = 0;
+    	
+    	// query number of physical devices available to this instance
+	    unsafe { vkGetPhysicalDeviceSparseImageFormatProperties(self.handle, format, type_, samples, usage, tiling, &mut sparse_image_format_properties_count, ptr::null_mut()) };
+		
+		// create result buffer
+		let mut raw_sparse_image_format_properties = Vec::with_capacity(sparse_image_format_properties_count as usize);
+		raw_sparse_image_format_properties.resize(sparse_image_format_properties_count as usize, VkSparseImageFormatProperties::default());
+		
+		// fill the result buffer
+	    unsafe { vkGetPhysicalDeviceSparseImageFormatProperties(self.handle, format, type_, samples, usage, tiling, &mut sparse_image_format_properties_count, raw_sparse_image_format_properties.as_mut_ptr()) };
+	    
+		raw_sparse_image_format_properties.truncate(sparse_image_format_properties_count as usize);
+		
+		raw_sparse_image_format_properties.iter().map(|item| SparseImageFormatProperties::from(item)).collect::<Vec<SparseImageFormatProperties>>()
+	}
+	
+	// pub fn vkEnumerateDeviceExtensionProperties(physicalDevice: VkPhysicalDevice, pLayerName: *const u8, pPropertyCount: *mut u32, pProperties: *mut VkExtensionProperties) -> VkResult;
+	#[allow(dead_code)]
+	// TODO accept layer_name as String
+	pub fn get_extension_properties(&self, layer_name: *const u8) -> Result<Vec<ExtensionProperties>, VkResult> {
+   		let mut extension_properties_count: u32 = 0;
+    	
+    	// query number of physical devices available to this instance
+	    let result = unsafe { vkEnumerateDeviceExtensionProperties(self.handle, layer_name, &mut extension_properties_count, ptr::null_mut()) };
+	    if result != VkResult::VK_SUCCESS { return Err(result); }
+		
+		// create result buffer
+		let mut raw_extension_properties = Vec::with_capacity(extension_properties_count as usize);
+		raw_extension_properties.resize(extension_properties_count as usize, VkExtensionProperties::default());
+		
+		// fill the result buffer
+	    let result = unsafe { vkEnumerateDeviceExtensionProperties(self.handle, layer_name, &mut extension_properties_count, raw_extension_properties.as_mut_ptr()) };
+	    if result != VkResult::VK_SUCCESS { return Err(result); }
+	    
+		raw_extension_properties.truncate(extension_properties_count as usize);
+		
+		Ok(raw_extension_properties.iter().map(|item| ExtensionProperties::from(item)).collect::<Vec<ExtensionProperties>>())
+	}
+	
 
 
     fn get_layer_properties(handle: VkPhysicalDevice) -> Vec<LayerProperties> {
