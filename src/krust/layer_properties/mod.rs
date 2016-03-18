@@ -56,7 +56,7 @@ impl LayerProperties {
 	
 	// TODO use some predefined Display, Debug, ToString, whatever trait or at least replace by a macro
 	pub fn dump(&self, prefix: &str) {
-		println!("{}is_graphics: {:?}", prefix, self.layer_name);
+		println!("{}layer_name: {:?}", prefix, self.layer_name);
 		println!("{}spec_version: {:?}", prefix, self.spec_version);
 		println!("{}implementation_version: {:?}", prefix, self.implementation_version);
 		println!("{}description: {:?}", prefix, self.description);

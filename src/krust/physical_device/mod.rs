@@ -1,21 +1,26 @@
 extern crate libc;
 
 mod features;
-mod limits;
-mod memory_properties;
-mod properties;
-mod sparse_properties;
-
 pub use self::features::PhysicalDeviceFeatures;
+
+mod limits;
 pub use self::limits::PhysicalDeviceLimits;
+
+mod memory_properties;
 pub use self::memory_properties::PhysicalDeviceMemoryProperties;
+
+mod properties;
 pub use self::properties::PhysicalDeviceProperties;
+
+mod sparse_properties;
 pub use self::sparse_properties::PhysicalDeviceSparseProperties;
+
 
 use krust::extension_properties::ExtensionProperties;
 use krust::sparse_image_format_properties::SparseImageFormatProperties;
 use krust::queue_family_properties::QueueFamilyProperties;
 use krust::layer_properties::LayerProperties;
+use krust::format_properties::FormatProperties;
 
 use std::ptr;
 use std::vec::Vec;
@@ -71,11 +76,11 @@ impl PhysicalDevice {
 	// pub fn vkGetPhysicalDeviceFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, pFormatProperties: *mut VkFormatProperties);
 	#[allow(dead_code)]
 	// TODO change to result type FormatProperties
-	pub fn get_format_properties(&self, format: VkFormat) -> VkFormatProperties {
+	pub fn get_format_properties(&self, format: VkFormat) -> FormatProperties {
 		let mut format_properties = VkFormatProperties::default(); 
 		unsafe { vkGetPhysicalDeviceFormatProperties(self.handle, format, &mut format_properties) };
 		
-		format_properties
+		FormatProperties::from(&format_properties)
 	}
 	
 	// pub fn vkGetPhysicalDeviceImageFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, type_: VkImageType, tiling: VkImageTiling, usage: VkImageUsageFlags, flags: VkImageCreateFlags, pImageFormatProperties: *mut VkImageFormatProperties) -> VkResult;
