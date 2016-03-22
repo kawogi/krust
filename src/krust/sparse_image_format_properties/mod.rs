@@ -38,7 +38,6 @@ impl<'a> From<&'a VkSparseImageFormatProperties> for SparseImageFormatProperties
 impl SparseImageFormatProperties {
 	
 	// TODO use some predefined Display, Debug, ToString, whatever trait or at least replace by a macro
-	#[allow(dead_code)]
 	pub fn dump(&self, prefix: &str) {
 		println!("{}aspect_mask: {:?}", prefix, self.aspect_mask);
 		println!("{}image_granularity: {:?}", prefix, self.image_granularity);

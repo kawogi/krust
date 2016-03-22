@@ -74,7 +74,6 @@ impl PhysicalDevice {
 	// pub fn vkCreateDevice(physicalDevice: VkPhysicalDevice, pCreateInfo: *const VkDeviceCreateInfo, pAllocator: *const VkAllocationCallbacks, pDevice: *mut VkDevice) -> VkResult;
 
 	// pub fn vkGetPhysicalDeviceFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, pFormatProperties: *mut VkFormatProperties);
-	#[allow(dead_code)]
 	// TODO change to result type FormatProperties
 	pub fn get_format_properties(&self, format: VkFormat) -> FormatProperties {
 		let mut format_properties = VkFormatProperties::default(); 
@@ -84,7 +83,6 @@ impl PhysicalDevice {
 	}
 	
 	// pub fn vkGetPhysicalDeviceImageFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, type_: VkImageType, tiling: VkImageTiling, usage: VkImageUsageFlags, flags: VkImageCreateFlags, pImageFormatProperties: *mut VkImageFormatProperties) -> VkResult;
-	#[allow(dead_code)]
 	// TODO change to result type ImageFormatProperties
 	pub fn get_image_format_properties(&self, format: VkFormat, type_: VkImageType, tiling: VkImageTiling, usage: VkImageUsageFlags, flags: VkImageCreateFlags) -> Result<VkImageFormatProperties, VkResult> {
 		let mut image_format_properties = VkImageFormatProperties::default();
@@ -95,7 +93,6 @@ impl PhysicalDevice {
 	}
 	
 	// pub fn vkGetPhysicalDeviceSparseImageFormatProperties(physicalDevice: VkPhysicalDevice, format: VkFormat, type_: VkImageType, samples: VkSampleCountFlagBits, usage: VkImageUsageFlags, tiling: VkImageTiling, pPropertyCount: *mut u32, pProperties: *mut VkSparseImageFormatProperties);
-	#[allow(dead_code)]
 	pub fn get_sparse_image_format_properties(&self, format: VkFormat, type_: VkImageType, samples: VkSampleCountFlags, usage: VkImageUsageFlags, tiling: VkImageTiling) -> Vec<SparseImageFormatProperties> {
    		let mut sparse_image_format_properties_count: u32 = 0;
     	
@@ -115,7 +112,6 @@ impl PhysicalDevice {
 	}
 	
 	// pub fn vkEnumerateDeviceExtensionProperties(physicalDevice: VkPhysicalDevice, pLayerName: *const u8, pPropertyCount: *mut u32, pProperties: *mut VkExtensionProperties) -> VkResult;
-	#[allow(dead_code)]
 	// TODO accept layer_name as String
 	pub fn get_extension_properties(&self, layer_name: *const u8) -> Result<Vec<ExtensionProperties>, VkResult> {
    		let mut extension_properties_count: u32 = 0;

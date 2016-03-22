@@ -1,4 +1,3 @@
-//use super;
 
 pub type VkBool32 = u32;
 pub type VkDeviceSize = u64;
@@ -8,19 +7,29 @@ pub type VkSampleMask = u32;
 pub type DispatchableHandle = u32;
 
 //VK_DEFINE_HANDLE(VkInstance)
-pub type VkInstance = DispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkInstance(pub DispatchableHandle);
 
 //VK_DEFINE_HANDLE(VkPhysicalDevice)
-pub type VkPhysicalDevice = DispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkPhysicalDevice(pub DispatchableHandle);
 
 //VK_DEFINE_HANDLE(VkDevice)
-pub type VkDevice = DispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkDevice(pub DispatchableHandle);
 
 //VK_DEFINE_HANDLE(VkQueue)
-pub type VkQueue = DispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkQueue(pub DispatchableHandle);
 
 //VK_DEFINE_HANDLE(VkCommandBuffer)
-pub type VkCommandBuffer = DispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkCommandBuffer(pub DispatchableHandle);
 
 
 
@@ -33,64 +42,104 @@ pub type VkCommandBuffer = DispatchableHandle;
 pub type NonDispatchableHandle = u32;
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkSemaphore)
-pub type VkSemaphore = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkSemaphore(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkFence)
-pub type VkFence = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkFence(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDeviceMemory)
-pub type VkDeviceMemory = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkDeviceMemory(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkBuffer)
-pub type VkBuffer = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkBuffer(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkImage)
-pub type VkImage = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkImage(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkEvent)
-pub type VkEvent = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkEvent(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkQueryPool)
-pub type VkQueryPool = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkQueryPool(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkBufferView)
-pub type VkBufferView = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkBufferView(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkImageView)
-pub type VkImageView = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkImageView(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkShaderModule)
-pub type VkShaderModule = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkShaderModule(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkPipelineCache)
-pub type VkPipelineCache = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkPipelineCache(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkPipelineLayout)
-pub type VkPipelineLayout = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkPipelineLayout(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkRenderPass)
-pub type VkRenderPass = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkRenderPass(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkPipeline)
-pub type VkPipeline = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkPipeline(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDescriptorSetLayout)
-pub type VkDescriptorSetLayout = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkDescriptorSetLayout(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkSampler)
-pub type VkSampler = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkSampler(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDescriptorPool)
-pub type VkDescriptorPool = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkDescriptorPool(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkDescriptorSet)
-pub type VkDescriptorSet = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkDescriptorSet(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkFramebuffer)
-pub type VkFramebuffer = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkFramebuffer(pub NonDispatchableHandle);
 
 //VK_DEFINE_NON_DISPATCHABLE_HANDLE(VkCommandPool)
-pub type VkCommandPool = NonDispatchableHandle;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct VkCommandPool(pub NonDispatchableHandle);
 
 
 

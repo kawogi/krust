@@ -24,7 +24,6 @@ bitflags! {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkImageUsageFlagBits {
 	VK_IMAGE_USAGE_TRANSFER_SRC_BIT = 0x00000001,
 	VK_IMAGE_USAGE_TRANSFER_DST_BIT = 0x00000002,
@@ -38,7 +37,6 @@ pub enum VkImageUsageFlagBits {
 pub type VkImageUsageFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkImageCreateFlagBits {
 	VK_IMAGE_CREATE_SPARSE_BINDING_BIT = 0x00000001,
 	VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT = 0x00000002,
@@ -52,19 +50,12 @@ bitflags! {
 	#[repr(C)]
 	#[derive(Default)]
 	pub flags VkSampleCountFlags: u32 { // VkFlags
-		#[allow(dead_code)]
 		const VK_SAMPLE_COUNT_1_BIT = 0x00000001,
-		#[allow(dead_code)]
 		const VK_SAMPLE_COUNT_2_BIT = 0x00000002,
-		#[allow(dead_code)]
 		const VK_SAMPLE_COUNT_4_BIT = 0x00000004,
-		#[allow(dead_code)]
 		const VK_SAMPLE_COUNT_8_BIT = 0x00000008,
-		#[allow(dead_code)]
 		const VK_SAMPLE_COUNT_16_BIT = 0x00000010,
-		#[allow(dead_code)]
 		const VK_SAMPLE_COUNT_32_BIT = 0x00000020,
-		#[allow(dead_code)]
 		const VK_SAMPLE_COUNT_64_BIT = 0x00000040,
 	}
 }
@@ -81,7 +72,6 @@ bitflags! {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkMemoryPropertyFlagBits {
 	VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT = 0x00000001,
 	VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT = 0x00000002,
@@ -92,7 +82,6 @@ pub enum VkMemoryPropertyFlagBits {
 pub type VkMemoryPropertyFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkMemoryHeapFlagBits {
 	DUMMY = 0,
 	VK_MEMORY_HEAP_DEVICE_LOCAL_BIT = 0x00000001,
@@ -102,7 +91,6 @@ pub type VkDeviceCreateFlags = VkFlags;
 pub type VkDeviceQueueCreateFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkPipelineStageFlagBits {
 	VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT = 0x00000001,
 	VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT = 0x00000002,
@@ -126,7 +114,6 @@ pub type VkPipelineStageFlags = VkFlags;
 pub type VkMemoryMapFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkImageAspectFlagBits {
 	VK_IMAGE_ASPECT_COLOR_BIT = 0x00000001,
 	VK_IMAGE_ASPECT_DEPTH_BIT = 0x00000002,
@@ -147,7 +134,6 @@ bitflags! {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkSparseMemoryBindFlagBits {
 	DUMMY = 0,
 	VK_SPARSE_MEMORY_BIND_METADATA_BIT = 0x00000001,
@@ -155,7 +141,6 @@ pub enum VkSparseMemoryBindFlagBits {
 pub type VkSparseMemoryBindFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkFenceCreateFlagBits {
 	DUMMY = 0,
 	VK_FENCE_CREATE_SIGNALED_BIT = 0x00000001,
@@ -166,7 +151,6 @@ pub type VkEventCreateFlags = VkFlags;
 pub type VkQueryPoolCreateFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkQueryPipelineStatisticFlagBits {
 	VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT = 0x00000001,
 	VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT = 0x00000002,
@@ -183,7 +167,6 @@ pub enum VkQueryPipelineStatisticFlagBits {
 pub type VkQueryPipelineStatisticFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkQueryResultFlagBits {
 	VK_QUERY_RESULT_64_BIT = 0x00000001,
 	VK_QUERY_RESULT_WAIT_BIT = 0x00000002,
@@ -193,7 +176,6 @@ pub enum VkQueryResultFlagBits {
 pub type VkQueryResultFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkBufferCreateFlagBits {
 	VK_BUFFER_CREATE_SPARSE_BINDING_BIT = 0x00000001,
 	VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT = 0x00000002,
@@ -202,7 +184,6 @@ pub enum VkBufferCreateFlagBits {
 pub type VkBufferCreateFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkBufferUsageFlagBits {
 	VK_BUFFER_USAGE_TRANSFER_SRC_BIT = 0x00000001,
 	VK_BUFFER_USAGE_TRANSFER_DST_BIT = 0x00000002,
@@ -221,7 +202,6 @@ pub type VkShaderModuleCreateFlags = VkFlags;
 pub type VkPipelineCacheCreateFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkPipelineCreateFlagBits {
 	VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT = 0x00000001,
 	VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT = 0x00000002,
@@ -231,7 +211,6 @@ pub type VkPipelineCreateFlags = VkFlags;
 pub type VkPipelineShaderStageCreateFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkShaderStageFlagBits {
 	VK_SHADER_STAGE_VERTEX_BIT = 0x00000001,
 	VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT = 0x00000002,
@@ -249,7 +228,6 @@ pub type VkPipelineViewportStateCreateFlags = VkFlags;
 pub type VkPipelineRasterizationStateCreateFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkCullModeFlagBits {
 	VK_CULL_MODE_NONE = 0,
 	VK_CULL_MODE_FRONT_BIT = 0x00000001,
@@ -262,7 +240,6 @@ pub type VkPipelineDepthStencilStateCreateFlags = VkFlags;
 pub type VkPipelineColorBlendStateCreateFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkColorComponentFlagBits {
 	VK_COLOR_COMPONENT_R_BIT = 0x00000001,
 	VK_COLOR_COMPONENT_G_BIT = 0x00000002,
@@ -277,7 +254,6 @@ pub type VkSamplerCreateFlags = VkFlags;
 pub type VkDescriptorSetLayoutCreateFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkDescriptorPoolCreateFlagBits {
 	DUMMY = 0,
 	VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT = 0x00000001,
@@ -288,7 +264,6 @@ pub type VkFramebufferCreateFlags = VkFlags;
 pub type VkRenderPassCreateFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkAttachmentDescriptionFlagBits {
 	DUMMY = 0,
 	VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT = 0x00000001,
@@ -297,7 +272,6 @@ pub type VkAttachmentDescriptionFlags = VkFlags;
 pub type VkSubpassDescriptionFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkAccessFlagBits {
 	VK_ACCESS_INDIRECT_COMMAND_READ_BIT = 0x00000001,
 	VK_ACCESS_INDEX_READ_BIT = 0x00000002,
@@ -320,7 +294,6 @@ pub enum VkAccessFlagBits {
 pub type VkAccessFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkDependencyFlagBits {
 	DUMMY = 0,
 	VK_DEPENDENCY_BY_REGION_BIT = 0x00000001,
@@ -328,7 +301,6 @@ pub enum VkDependencyFlagBits {
 pub type VkDependencyFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkCommandPoolCreateFlagBits {
 	VK_COMMAND_POOL_CREATE_TRANSIENT_BIT = 0x00000001,
 	VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT = 0x00000002,
@@ -336,7 +308,6 @@ pub enum VkCommandPoolCreateFlagBits {
 pub type VkCommandPoolCreateFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkCommandPoolResetFlagBits {
 	DUMMY = 0,
 	VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT = 0x00000001,
@@ -344,7 +315,6 @@ pub enum VkCommandPoolResetFlagBits {
 pub type VkCommandPoolResetFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkCommandBufferUsageFlagBits {
 	VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT = 0x00000001,
 	VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT = 0x00000002,
@@ -353,7 +323,6 @@ pub enum VkCommandBufferUsageFlagBits {
 pub type VkCommandBufferUsageFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkQueryControlFlagBits {
 	DUMMY = 0,
 	VK_QUERY_CONTROL_PRECISE_BIT = 0x00000001,
@@ -361,7 +330,6 @@ pub enum VkQueryControlFlagBits {
 pub type VkQueryControlFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkCommandBufferResetFlagBits {
 	DUMMY = 0,
 	VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT = 0x00000001,
@@ -369,7 +337,6 @@ pub enum VkCommandBufferResetFlagBits {
 pub type VkCommandBufferResetFlags = VkFlags;
 
 #[repr(C)]
-#[allow(dead_code)]
 pub enum VkStencilFaceFlagBits {
 	VK_STENCIL_FACE_FRONT_BIT = 0x00000001,
 	VK_STENCIL_FACE_BACK_BIT = 0x00000002,

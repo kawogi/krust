@@ -34,7 +34,6 @@ impl<'a> From<&'a VkExtensionProperties> for ExtensionProperties {
 impl ExtensionProperties {
 	
 	// TODO use some predefined Display, Debug, ToString, whatever trait or at least replace by a macro
-	#[allow(dead_code)]
 	pub fn dump(&self, prefix: &str) {
 		println!("{}extension_name: {:?}", prefix, self.extension_name);
 		println!("{}extension_name: {:?}", prefix, self.extension_name);

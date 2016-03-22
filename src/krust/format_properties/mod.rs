@@ -38,7 +38,6 @@ impl<'a> From<&'a VkFormatProperties> for FormatProperties {
 impl FormatProperties {
 	
 	// TODO use some predefined Display, Debug, ToString, whatever trait or at least replace by a macro
-	#[allow(dead_code)]
 	pub fn dump(&self, prefix: &str) {
 		
 		let mut indent: String = String::from(prefix);

@@ -2,8 +2,8 @@
 extern crate bitflags;
 extern crate libc;
 
-mod vk;
-mod krust;
+pub mod vk;
+pub mod krust;
 
 use std::option::Option;
 
@@ -16,7 +16,7 @@ fn main() {
 	let instance_create_info = instance::CreateInfo::default();
 	let allocator = Option::None;
 	let instance: Instance = Instance::create(&instance_create_info, allocator).unwrap();
-	println!("Instance handle: {}", instance.handle as u32);
+	println!("Instance handle: {:?}", instance.handle);
 
 	let physical_devices = instance.enumerate_physical_devices().unwrap();
 

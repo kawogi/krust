@@ -60,7 +60,6 @@ impl From<VkFormatFeatureFlags> for ImageFormatFeatures {
 impl ImageFormatFeatures {
 	
 	// TODO use some predefined Display, Debug, ToString, whatever trait or at least replace by a macro
-	#[allow(dead_code)]
 	pub fn dump(&self, prefix: &str) {
 		println!("{}is_sampled_image: {:?}", prefix, self.is_sampled_image);
 		println!("{}is_storage_image: {:?}", prefix, self.is_storage_image);

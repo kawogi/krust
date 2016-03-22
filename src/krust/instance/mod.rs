@@ -54,7 +54,6 @@ impl<'a> CreateInfo<'a> {
 		}
 	}
 	
-	#[allow(dead_code)]
 	pub fn for_application_info(application_info: &'a VkApplicationInfo) -> CreateInfo<'a> {
 		CreateInfo {
 			application_info: Option::Some(application_info),
@@ -117,7 +116,7 @@ impl<'a> Instance<'a> {
 		
 		let optional_allocator: *const VkAllocationCallbacks = match allocator { Some(some) => some, None => ptr::null() };
 		
-		let mut instance: VkInstance = 0;
+		let mut instance = VkInstance(0);
 		
 		let result = unsafe { vkCreateInstance(&vk_create_info, optional_allocator, &mut instance) };
 	    if result != VkResult::VK_SUCCESS { return Err(result); }
@@ -140,7 +139,7 @@ impl<'a> Instance<'a> {
 		
 		// create result buffer
 		let mut device_handles = Vec::with_capacity(device_count as usize);
-		device_handles.resize(device_count as usize, 0);
+		device_handles.resize(device_count as usize, VkPhysicalDevice(0));
 		
 		// fill the result buffer
 	    let result = unsafe { vkEnumeratePhysicalDevices(self.handle, &mut device_count, device_handles.as_mut_ptr()) };
@@ -153,7 +152,7 @@ impl<'a> Instance<'a> {
 		Ok(devices)
     }
 
-	#[allow(dead_code, unused_variables)]
+	#[allow(unused_variables)]
 	pub fn get_proc_addr(name: &str) -> ! {
 		//pub fn vkGetInstanceProcAddr(instance: VkInstance, pName: *const u8) -> PFN_vkVoidFunction;
 		unimplemented!()

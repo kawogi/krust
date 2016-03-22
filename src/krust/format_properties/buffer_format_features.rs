@@ -33,7 +33,6 @@ impl From<VkFormatFeatureFlags> for BufferFormatFeatures {
 impl BufferFormatFeatures {
 	
 	// TODO use some predefined Display, Debug, ToString, whatever trait or at least replace by a macro
-	#[allow(dead_code)]
 	pub fn dump(&self, prefix: &str) {
 		println!("{}is_uniform_texel_buffer: {:?}", prefix, self.is_uniform_texel_buffer);
 		println!("{}is_storage_texel_buffer: {:?}", prefix, self.is_storage_texel_buffer);

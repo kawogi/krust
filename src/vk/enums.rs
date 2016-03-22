@@ -1,7 +1,6 @@
 
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkPipelineCacheHeaderVersion {
 	DUMMY = 0,
@@ -13,7 +12,6 @@ pub enum VkPipelineCacheHeaderVersion {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 #[derive(Debug, PartialEq, Clone, Copy)]
 pub enum VkResult {
@@ -49,7 +47,6 @@ pub enum VkResult {
 
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkStructureType {
 	VK_STRUCTURE_TYPE_APPLICATION_INFO = 0,
@@ -120,7 +117,6 @@ pub enum VkStructureType {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkSystemAllocationScope {
 	VK_SYSTEM_ALLOCATION_SCOPE_COMMAND = 0,
@@ -135,7 +131,6 @@ pub enum VkSystemAllocationScope {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkInternalAllocationType {
 	DUMMY = 1,
@@ -147,7 +142,6 @@ pub enum VkInternalAllocationType {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 #[derive(Clone, Copy)]
 pub enum VkFormat {
@@ -343,7 +337,6 @@ pub enum VkFormat {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 #[derive(Clone, Copy)]
 pub enum VkImageType {
@@ -357,7 +350,6 @@ pub enum VkImageType {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[derive(Clone, Copy)]
 pub enum VkImageTiling {
 	VK_IMAGE_TILING_OPTIMAL = 0,
@@ -369,33 +361,22 @@ pub enum VkImageTiling {
 }
 
 //#[repr(C)]
-//#[allow(dead_code)]
 //#[allow(non_camel_case_types)]
 //#[derive(Debug)]
 //pub enum VkPhysicalDeviceType {
-#[allow(dead_code)]
 pub const VK_PHYSICAL_DEVICE_TYPE_OTHER: VkPhysicalDeviceType = 0;
-#[allow(dead_code)]
 pub const VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU: VkPhysicalDeviceType = 1;
-#[allow(dead_code)]
 pub const VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU: VkPhysicalDeviceType = 2;
-#[allow(dead_code)]
 pub const VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU: VkPhysicalDeviceType = 3;
-#[allow(dead_code)]
 pub const VK_PHYSICAL_DEVICE_TYPE_CPU: VkPhysicalDeviceType = 4;
-#[allow(dead_code)]
 pub const VK_PHYSICAL_DEVICE_TYPE_BEGIN_RANGE: VkPhysicalDeviceType = VK_PHYSICAL_DEVICE_TYPE_OTHER;
-#[allow(dead_code)]
 pub const VK_PHYSICAL_DEVICE_TYPE_END_RANGE: VkPhysicalDeviceType = VK_PHYSICAL_DEVICE_TYPE_CPU;
-#[allow(dead_code)]
 pub const VK_PHYSICAL_DEVICE_TYPE_RANGE_SIZE: VkPhysicalDeviceType = (VK_PHYSICAL_DEVICE_TYPE_CPU - VK_PHYSICAL_DEVICE_TYPE_OTHER + 1);
-#[allow(dead_code)]
 pub const VK_PHYSICAL_DEVICE_TYPE_MAX_ENUM: VkPhysicalDeviceType = 0x7FFFFFFF;
 //}
 pub type VkPhysicalDeviceType = u32;
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkQueryType {
 	VK_QUERY_TYPE_OCCLUSION = 0,
@@ -408,7 +389,6 @@ pub enum VkQueryType {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkSharingMode {
 	VK_SHARING_MODE_EXCLUSIVE = 0,
@@ -420,7 +400,6 @@ pub enum VkSharingMode {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkImageLayout {
 	VK_IMAGE_LAYOUT_UNDEFINED = 0,
@@ -440,7 +419,6 @@ pub enum VkImageLayout {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkImageViewType {
 	VK_IMAGE_VIEW_TYPE_1D = 0,
@@ -457,7 +435,6 @@ pub enum VkImageViewType {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkComponentSwizzle {
 	VK_COMPONENT_SWIZZLE_IDENTITY = 0,
@@ -474,7 +451,6 @@ pub enum VkComponentSwizzle {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkVertexInputRate {
 	VK_VERTEX_INPUT_RATE_VERTEX = 0,
@@ -486,7 +462,6 @@ pub enum VkVertexInputRate {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkPrimitiveTopology {
 	VK_PRIMITIVE_TOPOLOGY_POINT_LIST = 0,
@@ -507,7 +482,6 @@ pub enum VkPrimitiveTopology {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkPolygonMode {
 	VK_POLYGON_MODE_FILL = 0,
@@ -520,7 +494,6 @@ pub enum VkPolygonMode {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkFrontFace {
 	VK_FRONT_FACE_COUNTER_CLOCKWISE = 0,
@@ -532,7 +505,6 @@ pub enum VkFrontFace {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkCompareOp {
 	VK_COMPARE_OP_NEVER = 0,
@@ -550,7 +522,6 @@ pub enum VkCompareOp {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkStencilOp {
 	VK_STENCIL_OP_KEEP = 0,
@@ -568,7 +539,6 @@ pub enum VkStencilOp {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkLogicOp {
 	VK_LOGIC_OP_CLEAR = 0,
@@ -594,7 +564,6 @@ pub enum VkLogicOp {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkBlendFactor {
 	VK_BLEND_FACTOR_ZERO = 0,
@@ -623,7 +592,6 @@ pub enum VkBlendFactor {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkBlendOp {
 	VK_BLEND_OP_ADD = 0,
@@ -638,7 +606,6 @@ pub enum VkBlendOp {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkDynamicState {
 	VK_DYNAMIC_STATE_VIEWPORT = 0,
@@ -657,7 +624,6 @@ pub enum VkDynamicState {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkFilter {
 	VK_FILTER_NEAREST = 0,
@@ -669,7 +635,6 @@ pub enum VkFilter {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkSamplerMipmapMode {
 	VK_SAMPLER_MIPMAP_MODE_NEAREST = 0,
@@ -681,7 +646,6 @@ pub enum VkSamplerMipmapMode {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkSamplerAddressMode {
 	VK_SAMPLER_ADDRESS_MODE_REPEAT = 0,
@@ -696,7 +660,6 @@ pub enum VkSamplerAddressMode {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkBorderColor {
 	VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK = 0,
@@ -712,7 +675,6 @@ pub enum VkBorderColor {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkDescriptorType {
 	VK_DESCRIPTOR_TYPE_SAMPLER = 0,
@@ -733,7 +695,6 @@ pub enum VkDescriptorType {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkAttachmentLoadOp {
 	VK_ATTACHMENT_LOAD_OP_LOAD = 0,
@@ -746,7 +707,6 @@ pub enum VkAttachmentLoadOp {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkAttachmentStoreOp {
 	VK_ATTACHMENT_STORE_OP_STORE = 0,
@@ -758,7 +718,6 @@ pub enum VkAttachmentStoreOp {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkPipelineBindPoint {
 	VK_PIPELINE_BIND_POINT_GRAPHICS = 0,
@@ -770,7 +729,6 @@ pub enum VkPipelineBindPoint {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkCommandBufferLevel {
 	VK_COMMAND_BUFFER_LEVEL_PRIMARY = 0,
@@ -782,7 +740,6 @@ pub enum VkCommandBufferLevel {
 }
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkIndexType {
 	VK_INDEX_TYPE_UINT16 = 0,
@@ -795,7 +752,6 @@ pub enum VkIndexType {
 
 
 #[repr(C)]
-#[allow(dead_code)]
 #[allow(non_camel_case_types)]
 pub enum VkSubpassContents {
 	VK_SUBPASS_CONTENTS_INLINE = 0,

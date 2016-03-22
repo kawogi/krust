@@ -48,7 +48,6 @@ pub struct VkAllocationCallbacks {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 #[derive(Default)]
 pub struct VkPhysicalDeviceFeatures {
 	pub robustBufferAccess: VkBool32,
@@ -119,7 +118,6 @@ pub struct VkFormatProperties {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 #[derive(Debug, Clone, Copy, Default)]
 pub struct VkExtent3D {
 	pub width: u32,
@@ -140,7 +138,6 @@ pub struct VkImageFormatProperties {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 #[derive(Default)]
 pub struct VkPhysicalDeviceLimits {
 	pub maxImageDimension1D: u32,
@@ -253,7 +250,6 @@ pub struct VkPhysicalDeviceLimits {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 #[derive(Default)]
 pub struct VkPhysicalDeviceSparseProperties {
 	pub residencyStandard2DBlockShape: VkBool32,
@@ -288,7 +284,6 @@ impl Default for DeviceNameSlice {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 #[derive(Clone, Default)]
 pub struct VkQueueFamilyProperties {
 	pub queueFlags: VkQueueFlags,
@@ -299,7 +294,6 @@ pub struct VkQueueFamilyProperties {
 	
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 #[derive(Default, Debug, Clone, Copy)]
 pub struct VkMemoryType {
 	pub propertyFlags: VkMemoryPropertyFlags,
@@ -308,7 +302,6 @@ pub struct VkMemoryType {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 #[derive(Default, Debug, Clone, Copy)]
 pub struct VkMemoryHeap {
 	pub size: VkDeviceSize,
@@ -317,7 +310,6 @@ pub struct VkMemoryHeap {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 #[derive(Default)]
 pub struct VkPhysicalDeviceMemoryProperties {
 	pub memoryTypeCount: u32,
@@ -342,7 +334,6 @@ impl Default for MemoryHeapsSlice {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkDeviceQueueCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -354,7 +345,6 @@ pub struct VkDeviceQueueCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkDeviceCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -440,7 +430,6 @@ impl Clone for DescriptionSlice {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkSubmitInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -455,7 +444,6 @@ pub struct VkSubmitInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkMemoryAllocateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -465,7 +453,6 @@ pub struct VkMemoryAllocateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkMappedMemoryRange {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -476,7 +463,6 @@ pub struct VkMappedMemoryRange {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkMemoryRequirements {
 	pub size: VkDeviceSize,
 	pub alignment: VkDeviceSize,
@@ -494,7 +480,6 @@ pub struct VkSparseImageFormatProperties {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkSparseImageMemoryRequirements {
 	pub formatProperties: VkSparseImageFormatProperties,
 	pub imageMipTailFirstLod: u32,
@@ -505,7 +490,6 @@ pub struct VkSparseImageMemoryRequirements {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkSparseMemoryBind {
 	pub resourceOffset: VkDeviceSize,
 	pub size: VkDeviceSize,
@@ -516,7 +500,6 @@ pub struct VkSparseMemoryBind {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkSparseBufferMemoryBindInfo {
 	pub buffer: VkBuffer,
 	pub bindCount: u32,
@@ -525,7 +508,6 @@ pub struct VkSparseBufferMemoryBindInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkSparseImageOpaqueMemoryBindInfo {
 	pub image: VkImage,
 	pub bindCount: u32,
@@ -534,7 +516,6 @@ pub struct VkSparseImageOpaqueMemoryBindInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkImageSubresource {
 	pub aspectMask: VkImageAspectFlags,
 	pub mipLevel: u32,
@@ -543,7 +524,6 @@ pub struct VkImageSubresource {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkOffset3D {
 	pub x: i32,
 	pub y: i32,
@@ -552,7 +532,6 @@ pub struct VkOffset3D {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkSparseImageMemoryBind {
 	pub subresource: VkImageSubresource,
 	pub offset: VkOffset3D,
@@ -564,7 +543,6 @@ pub struct VkSparseImageMemoryBind {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkSparseImageMemoryBindInfo {
 	pub image: VkImage,
 	pub bindCount: u32,
@@ -573,7 +551,6 @@ pub struct VkSparseImageMemoryBindInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkBindSparseInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -591,7 +568,6 @@ pub struct VkBindSparseInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkFenceCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -600,7 +576,6 @@ pub struct VkFenceCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkSemaphoreCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -609,7 +584,6 @@ pub struct VkSemaphoreCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkEventCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -618,7 +592,6 @@ pub struct VkEventCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkQueryPoolCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -630,7 +603,6 @@ pub struct VkQueryPoolCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkBufferCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -644,7 +616,6 @@ pub struct VkBufferCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkBufferViewCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -657,7 +628,6 @@ pub struct VkBufferViewCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkImageCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -678,7 +648,6 @@ pub struct VkImageCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkSubresourceLayout {
 	pub offset: VkDeviceSize,
 	pub size: VkDeviceSize,
@@ -689,7 +658,6 @@ pub struct VkSubresourceLayout {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkComponentMapping {
 	pub r: VkComponentSwizzle,
 	pub g: VkComponentSwizzle,
@@ -699,7 +667,6 @@ pub struct VkComponentMapping {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkImageSubresourceRange {
 	pub aspectMask: VkImageAspectFlags,
 	pub baseMipLevel: u32,
@@ -710,7 +677,6 @@ pub struct VkImageSubresourceRange {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkImageViewCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -724,7 +690,6 @@ pub struct VkImageViewCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkShaderModuleCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -735,7 +700,6 @@ pub struct VkShaderModuleCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkPipelineCacheCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -746,7 +710,6 @@ pub struct VkPipelineCacheCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkSpecializationMapEntry {
 	pub constantID: u32,
 	pub offset: u32,
@@ -755,7 +718,6 @@ pub struct VkSpecializationMapEntry {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkSpecializationInfo {
 	pub mapEntryCount: u32,
 	pub pMapEntries: *const VkSpecializationMapEntry, // *const [VkSpecializationMapEntry],
@@ -765,7 +727,6 @@ pub struct VkSpecializationInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkPipelineShaderStageCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -778,7 +739,6 @@ pub struct VkPipelineShaderStageCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkVertexInputBindingDescription {
 	pub binding: u32,
 	pub stride: u32,
@@ -787,7 +747,6 @@ pub struct VkVertexInputBindingDescription {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkVertexInputAttributeDescription {
 	pub location: u32,
 	pub binding: u32,
@@ -797,7 +756,6 @@ pub struct VkVertexInputAttributeDescription {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkPipelineVertexInputStateCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -810,7 +768,6 @@ pub struct VkPipelineVertexInputStateCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkPipelineInputAssemblyStateCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -821,7 +778,6 @@ pub struct VkPipelineInputAssemblyStateCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkPipelineTessellationStateCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -831,7 +787,6 @@ pub struct VkPipelineTessellationStateCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkViewport {
 	pub x: f32,
 	pub y: f32,
@@ -843,7 +798,6 @@ pub struct VkViewport {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkOffset2D {
 	pub x: i32,
 	pub y: i32,
@@ -851,7 +805,6 @@ pub struct VkOffset2D {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkExtent2D {
 	pub width: u32,
 	pub height: u32,
@@ -859,7 +812,6 @@ pub struct VkExtent2D {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkRect2D {
 	pub offset: VkOffset2D,
 	pub extent: VkExtent2D,
@@ -867,7 +819,6 @@ pub struct VkRect2D {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkPipelineViewportStateCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -880,7 +831,6 @@ pub struct VkPipelineViewportStateCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkPipelineRasterizationStateCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -899,7 +849,6 @@ pub struct VkPipelineRasterizationStateCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkPipelineMultisampleStateCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -914,7 +863,6 @@ pub struct VkPipelineMultisampleStateCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkStencilOpState {
 	pub failOp: VkStencilOp,
 	pub passOp: VkStencilOp,
@@ -927,7 +875,6 @@ pub struct VkStencilOpState {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkPipelineDepthStencilStateCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -945,7 +892,6 @@ pub struct VkPipelineDepthStencilStateCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkPipelineColorBlendAttachmentState {
 	pub blendEnable: VkBool32,
 	pub srcColorBlendFactor: VkBlendFactor,
@@ -959,7 +905,6 @@ pub struct VkPipelineColorBlendAttachmentState {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkPipelineColorBlendStateCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -973,7 +918,6 @@ pub struct VkPipelineColorBlendStateCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkPipelineDynamicStateCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -984,7 +928,6 @@ pub struct VkPipelineDynamicStateCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkGraphicsPipelineCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1009,7 +952,6 @@ pub struct VkGraphicsPipelineCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkComputePipelineCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1022,7 +964,6 @@ pub struct VkComputePipelineCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkPushConstantRange {
 	pub stageFlags: VkShaderStageFlags,
 	pub offset: u32,
@@ -1031,7 +972,6 @@ pub struct VkPushConstantRange {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkPipelineLayoutCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1044,7 +984,6 @@ pub struct VkPipelineLayoutCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkSamplerCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1068,7 +1007,6 @@ pub struct VkSamplerCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkDescriptorSetLayoutBinding {
 	pub binding: u32,
 	pub descriptorType: VkDescriptorType,
@@ -1079,7 +1017,6 @@ pub struct VkDescriptorSetLayoutBinding {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkDescriptorSetLayoutCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1090,7 +1027,6 @@ pub struct VkDescriptorSetLayoutCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkDescriptorPoolSize {
 	pub type_: VkDescriptorType,
 	pub descriptorCount: u32,
@@ -1098,7 +1034,6 @@ pub struct VkDescriptorPoolSize {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkDescriptorPoolCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1110,7 +1045,6 @@ pub struct VkDescriptorPoolCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkDescriptorSetAllocateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1121,7 +1055,6 @@ pub struct VkDescriptorSetAllocateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkDescriptorImageInfo {
 	pub sampler: VkSampler,
 	pub imageView: VkImageView,
@@ -1130,7 +1063,6 @@ pub struct VkDescriptorImageInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkDescriptorBufferInfo {
 	pub buffer: VkBuffer,
 	pub offset: VkDeviceSize,
@@ -1139,7 +1071,6 @@ pub struct VkDescriptorBufferInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkWriteDescriptorSet {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1155,7 +1086,6 @@ pub struct VkWriteDescriptorSet {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkCopyDescriptorSet {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1170,7 +1100,6 @@ pub struct VkCopyDescriptorSet {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkFramebufferCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1185,7 +1114,6 @@ pub struct VkFramebufferCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkAttachmentDescription {
 	pub flags: VkAttachmentDescriptionFlags,
 	pub format: VkFormat,
@@ -1200,7 +1128,6 @@ pub struct VkAttachmentDescription {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkAttachmentReference {
 	pub attachment: u32,
 	pub layout: VkImageLayout,
@@ -1208,7 +1135,6 @@ pub struct VkAttachmentReference {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkSubpassDescription {
 	pub flags: VkSubpassDescriptionFlags,
 	pub pipelineBindPoint: VkPipelineBindPoint,
@@ -1224,7 +1150,6 @@ pub struct VkSubpassDescription {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkSubpassDependency {
 	pub srcSubpass: u32,
 	pub dstSubpass: u32,
@@ -1237,7 +1162,6 @@ pub struct VkSubpassDependency {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkRenderPassCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1252,7 +1176,6 @@ pub struct VkRenderPassCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkCommandPoolCreateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1262,7 +1185,6 @@ pub struct VkCommandPoolCreateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkCommandBufferAllocateInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1273,7 +1195,6 @@ pub struct VkCommandBufferAllocateInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkCommandBufferInheritanceInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1287,7 +1208,6 @@ pub struct VkCommandBufferInheritanceInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkCommandBufferBeginInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1297,7 +1217,6 @@ pub struct VkCommandBufferBeginInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkBufferCopy {
 	pub srcOffset: VkDeviceSize,
 	pub dstOffset: VkDeviceSize,
@@ -1306,7 +1225,6 @@ pub struct VkBufferCopy {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkImageSubresourceLayers {
 	pub aspectMask: VkImageAspectFlags,
 	pub mipLevel: u32,
@@ -1316,7 +1234,6 @@ pub struct VkImageSubresourceLayers {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkImageCopy {
 	pub srcSubresource: VkImageSubresourceLayers,
 	pub srcOffset: VkOffset3D,
@@ -1327,7 +1244,6 @@ pub struct VkImageCopy {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkImageBlit {
 	pub srcSubresource: VkImageSubresourceLayers,
 	pub srcOffsets: [VkOffset3D; 2],
@@ -1337,7 +1253,6 @@ pub struct VkImageBlit {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkBufferImageCopy {
 	pub bufferOffset: VkDeviceSize,
 	pub bufferRowLength: u32,
@@ -1349,7 +1264,6 @@ pub struct VkBufferImageCopy {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkClearColorValue { //typedef union VkClearColorValue {
 	//f32 float32[4], see VkClearColorValueAsFloat32
 	//i32 int32[4], see VkClearColorValueAsInt32
@@ -1359,28 +1273,24 @@ pub struct VkClearColorValue { //typedef union VkClearColorValue {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkClearColorValueAsFloat32 {
 	pub float32: [f32; 4],
 }
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkClearColorValueAsInt32 {
 	pub int32: [i32; 4],
 }
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkClearColorValueAsUint32 {
 	pub uint32: [u32; 4],
 }
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkClearDepthStencilValue {
 	pub depth: f32,
 	pub stencil: u32,
@@ -1388,7 +1298,6 @@ pub struct VkClearDepthStencilValue {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 // TODO replace by unsafe enum as soon as available; see https://github.com/rust-lang/rfcs/issues/877
 pub struct VkClearValue { //typedef union VkClearValue {
 	//VkClearColorValue color, see VkClearValueAsColor
@@ -1398,14 +1307,12 @@ pub struct VkClearValue { //typedef union VkClearValue {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkClearValueAsColor {
 	pub color: VkClearColorValue,
 }
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkClearValueAsDepthStencil {
 	pub depthStencil: VkClearDepthStencilValue,
 }
@@ -1414,7 +1321,6 @@ pub struct VkClearValueAsDepthStencil {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkClearAttachment {
 	pub aspectMask: VkImageAspectFlags,
 	pub colorAttachment: u32,
@@ -1423,7 +1329,6 @@ pub struct VkClearAttachment {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkClearRect {
 	pub rect: VkRect2D,
 	pub baseArrayLayer: u32,
@@ -1432,7 +1337,6 @@ pub struct VkClearRect {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkImageResolve {
 	pub srcSubresource: VkImageSubresourceLayers,
 	pub srcOffset: VkOffset3D,
@@ -1443,7 +1347,6 @@ pub struct VkImageResolve {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkMemoryBarrier {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1453,7 +1356,6 @@ pub struct VkMemoryBarrier {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkBufferMemoryBarrier {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1468,7 +1370,6 @@ pub struct VkBufferMemoryBarrier {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkImageMemoryBarrier {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1484,7 +1385,6 @@ pub struct VkImageMemoryBarrier {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkRenderPassBeginInfo {
 	pub sType: VkStructureType,
 	pub pNext: *const libc::c_void,
@@ -1497,7 +1397,6 @@ pub struct VkRenderPassBeginInfo {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkDispatchIndirectCommand {
 	pub x: u32,
 	pub y: u32,
@@ -1506,7 +1405,6 @@ pub struct VkDispatchIndirectCommand {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkDrawIndexedIndirectCommand {
 	pub indexCount: u32,
 	pub instanceCount: u32,
@@ -1517,7 +1415,6 @@ pub struct VkDrawIndexedIndirectCommand {
 
 #[repr(C)]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 pub struct VkDrawIndirectCommand {
 	pub vertexCount: u32,
 	pub instanceCount: u32,

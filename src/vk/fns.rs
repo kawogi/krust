@@ -9,7 +9,6 @@ use super::structs::*;
 //#[cfg(all(target_os = "win32", target_arch = "x86"))]
 #[link(name = "vulkan-1")]
 #[allow(non_snake_case)]
-#[allow(dead_code)]
 extern "stdcall" {
 	
 	//VkResult vkCreateInstance(
