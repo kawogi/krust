@@ -18,7 +18,7 @@ impl<'a> From<&'a VkExtensionProperties> for ExtensionProperties {
 		
 		// TODO there has to be a std-solution somewhere
 		let extension_name = {
-			let &ExtensionNameSlice(extension_name_bytes) = &extension_properties.extensionName;
+			let &VkExtensionProperties_ExtensionNameSlice(extension_name_bytes) = &extension_properties.extensionName;
 			let extension_name_len = extension_name_bytes.iter().position(|&c| c == 0).unwrap_or(extension_name_bytes.len());
 			String::from_utf8_lossy(&extension_name_bytes[0..extension_name_len]).into_owned()
 		};

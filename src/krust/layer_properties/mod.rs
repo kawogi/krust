@@ -30,14 +30,14 @@ impl<'a> From<&'a VkLayerProperties> for LayerProperties {
 		
 		// TODO there has to be a std-solution somewhere
 		let layer_name = {
-			let &LayerNameSlice(layer_name_bytes) = &queue_family_properties.layerName;
+			let &VkLayerProperties_LayerNameSlice(layer_name_bytes) = &queue_family_properties.layerName;
 			let layer_name_len = layer_name_bytes.iter().position(|&c| c == 0).unwrap_or(layer_name_bytes.len());
 			String::from_utf8_lossy(&layer_name_bytes[0..layer_name_len]).into_owned()
 		};
 
 		// TODO there has to be a std-solution somewhere
 		let description = {
-			let &DescriptionSlice(description_bytes) = &queue_family_properties.description;
+			let &VkLayerProperties_DescriptionSlice(description_bytes) = &queue_family_properties.description;
 			let description_len = description_bytes.iter().position(|&c| c == 0).unwrap_or(description_bytes.len());
 			String::from_utf8_lossy(&description_bytes[0..description_len]).into_owned()
 		};

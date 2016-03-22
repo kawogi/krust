@@ -268,17 +268,17 @@ pub struct VkPhysicalDeviceProperties {
 	pub vendorID: u32,
 	pub deviceID: u32,
 	pub deviceType: VkPhysicalDeviceType,
-	pub deviceName: DeviceNameSlice, //[libc::c_uchar; VK_MAX_PHYSICAL_DEVICE_NAME_SIZE],
+	pub deviceName: VkPhysicalDeviceProperties_DeviceNameSlice, //[libc::c_uchar; VK_MAX_PHYSICAL_DEVICE_NAME_SIZE],
 	pub pipelineCacheUUID: [u8; VK_UUID_SIZE],
 	pub limits: VkPhysicalDeviceLimits,
 	pub sparseProperties: VkPhysicalDeviceSparseProperties,
 }
 
 #[repr(C)]
-pub struct DeviceNameSlice(pub [libc::c_uchar; VK_MAX_PHYSICAL_DEVICE_NAME_SIZE]);
+pub struct VkPhysicalDeviceProperties_DeviceNameSlice(pub [libc::c_uchar; VK_MAX_PHYSICAL_DEVICE_NAME_SIZE]);
 
-impl Default for DeviceNameSlice {
-    fn default() -> Self { DeviceNameSlice([libc::c_uchar::default(); VK_MAX_PHYSICAL_DEVICE_NAME_SIZE]) }
+impl Default for VkPhysicalDeviceProperties_DeviceNameSlice {
+    fn default() -> Self { VkPhysicalDeviceProperties_DeviceNameSlice([libc::c_uchar::default(); VK_MAX_PHYSICAL_DEVICE_NAME_SIZE]) }
 }
 
 
@@ -313,23 +313,23 @@ pub struct VkMemoryHeap {
 #[derive(Default)]
 pub struct VkPhysicalDeviceMemoryProperties {
 	pub memoryTypeCount: u32,
-	pub memoryTypes: MemoryTypesSlice, //[VkMemoryType; VK_MAX_MEMORY_TYPES],
+	pub memoryTypes: VkPhysicalDeviceMemoryProperties_MemoryTypesSlice, //[VkMemoryType; VK_MAX_MEMORY_TYPES],
 	pub memoryHeapCount: u32,
-	pub memoryHeaps: MemoryHeapsSlice, //[VkMemoryHeap; VK_MAX_MEMORY_HEAPS],
+	pub memoryHeaps: VkPhysicalDeviceMemoryProperties_MemoryHeapsSlice, //[VkMemoryHeap; VK_MAX_MEMORY_HEAPS],
 }
 
 #[repr(C)]
-pub struct MemoryTypesSlice(pub [VkMemoryType; VK_MAX_MEMORY_TYPES]);
+pub struct VkPhysicalDeviceMemoryProperties_MemoryTypesSlice(pub [VkMemoryType; VK_MAX_MEMORY_TYPES]);
 
-impl Default for MemoryTypesSlice {
-    fn default() -> Self { MemoryTypesSlice([VkMemoryType::default(); VK_MAX_MEMORY_TYPES]) }
+impl Default for VkPhysicalDeviceMemoryProperties_MemoryTypesSlice {
+    fn default() -> Self { VkPhysicalDeviceMemoryProperties_MemoryTypesSlice([VkMemoryType::default(); VK_MAX_MEMORY_TYPES]) }
 }
 
 #[repr(C)]
-pub struct MemoryHeapsSlice(pub [VkMemoryHeap; VK_MAX_MEMORY_HEAPS]);
+pub struct VkPhysicalDeviceMemoryProperties_MemoryHeapsSlice(pub [VkMemoryHeap; VK_MAX_MEMORY_HEAPS]);
 
-impl Default for MemoryHeapsSlice {
-    fn default() -> Self { MemoryHeapsSlice([VkMemoryHeap::default(); VK_MAX_MEMORY_HEAPS]) }
+impl Default for VkPhysicalDeviceMemoryProperties_MemoryHeapsSlice {
+    fn default() -> Self { VkPhysicalDeviceMemoryProperties_MemoryHeapsSlice([VkMemoryHeap::default(); VK_MAX_MEMORY_HEAPS]) }
 }
 
 #[repr(C)]
@@ -362,24 +362,24 @@ pub struct VkDeviceCreateInfo {
 #[allow(non_snake_case)]
 #[derive(Default, Clone)]
 pub struct VkExtensionProperties {
-	pub extensionName: ExtensionNameSlice, //[libc::c_uchar; VK_MAX_EXTENSION_NAME_SIZE],
+	pub extensionName: VkExtensionProperties_ExtensionNameSlice, //[libc::c_uchar; VK_MAX_EXTENSION_NAME_SIZE],
 	pub specVersion: u32,
 }
 
 #[repr(C)]
-pub struct ExtensionNameSlice(pub [libc::c_uchar; VK_MAX_EXTENSION_NAME_SIZE]);
+pub struct VkExtensionProperties_ExtensionNameSlice(pub [libc::c_uchar; VK_MAX_EXTENSION_NAME_SIZE]);
 
-impl Default for ExtensionNameSlice {
-    fn default() -> Self { ExtensionNameSlice([libc::c_uchar::default(); VK_MAX_EXTENSION_NAME_SIZE]) }
+impl Default for VkExtensionProperties_ExtensionNameSlice {
+    fn default() -> Self { VkExtensionProperties_ExtensionNameSlice([libc::c_uchar::default(); VK_MAX_EXTENSION_NAME_SIZE]) }
 }
 
 // TODO isn't there an easier way?
-impl Clone for ExtensionNameSlice {
+impl Clone for VkExtensionProperties_ExtensionNameSlice {
     fn clone(&self) -> Self {
     	//*self
     	let mut result = Self::default().0;
     	result.clone_from_slice(&self.0);
-    	ExtensionNameSlice(result)
+    	VkExtensionProperties_ExtensionNameSlice(result)
     }
 }
 
@@ -387,42 +387,42 @@ impl Clone for ExtensionNameSlice {
 #[allow(non_snake_case)]
 #[derive(Default, Clone)]
 pub struct VkLayerProperties {
-	pub layerName: LayerNameSlice, //[libc::c_uchar; VK_MAX_EXTENSION_NAME_SIZE],
+	pub layerName: VkLayerProperties_LayerNameSlice, //[libc::c_uchar; VK_MAX_EXTENSION_NAME_SIZE],
 	pub specVersion: u32,
 	pub implementationVersion: u32,
-	pub description: DescriptionSlice, //[libc::c_uchar; VK_MAX_DESCRIPTION_SIZE],
+	pub description: VkLayerProperties_DescriptionSlice, //[libc::c_uchar; VK_MAX_DESCRIPTION_SIZE],
 }
 
 #[repr(C)]
-pub struct LayerNameSlice(pub [libc::c_uchar; VK_MAX_EXTENSION_NAME_SIZE]);
+pub struct VkLayerProperties_LayerNameSlice(pub [libc::c_uchar; VK_MAX_EXTENSION_NAME_SIZE]);
 
-impl Default for LayerNameSlice {
-    fn default() -> Self { LayerNameSlice([libc::c_uchar::default(); VK_MAX_EXTENSION_NAME_SIZE]) }
+impl Default for VkLayerProperties_LayerNameSlice {
+    fn default() -> Self { VkLayerProperties_LayerNameSlice([libc::c_uchar::default(); VK_MAX_EXTENSION_NAME_SIZE]) }
 }
 
 // TODO isn't there an easier way?
-impl Clone for LayerNameSlice {
+impl Clone for VkLayerProperties_LayerNameSlice {
     fn clone(&self) -> Self {
     	//*self
     	let mut result = [libc::c_uchar::default(); VK_MAX_EXTENSION_NAME_SIZE];
     	result.clone_from_slice(&self.0);
-    	LayerNameSlice(result)
+    	VkLayerProperties_LayerNameSlice(result)
     }
 }
 
 #[repr(C)]
-pub struct DescriptionSlice(pub [libc::c_uchar; VK_MAX_DESCRIPTION_SIZE]);
+pub struct VkLayerProperties_DescriptionSlice(pub [libc::c_uchar; VK_MAX_DESCRIPTION_SIZE]);
 
-impl Default for DescriptionSlice {
-    fn default() -> Self { DescriptionSlice([libc::c_uchar::default(); VK_MAX_DESCRIPTION_SIZE]) }
+impl Default for VkLayerProperties_DescriptionSlice {
+    fn default() -> Self { VkLayerProperties_DescriptionSlice([libc::c_uchar::default(); VK_MAX_DESCRIPTION_SIZE]) }
 }
 
 // TODO isn't there an easier way?
-impl Clone for DescriptionSlice {
+impl Clone for VkLayerProperties_DescriptionSlice {
     fn clone(&self) -> Self {
     	let mut result = [libc::c_uchar::default(); VK_MAX_EXTENSION_NAME_SIZE];
     	result.clone_from_slice(&self.0);
-    	DescriptionSlice(result)
+    	VkLayerProperties_DescriptionSlice(result)
     }
 }
 
